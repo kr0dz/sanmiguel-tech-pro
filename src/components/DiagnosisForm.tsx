@@ -42,6 +42,7 @@ const SOURCE_LABELS: Record<string, { es: string; en: string }> = {
   "services-footer": { es: "Servicios · orientación general", en: "Services · general guidance" },
   "software-page": { es: "Página de instalación de programas", en: "Software installation page" },
   "contact-page": { es: "Página de contacto", en: "Contact page" },
+  "faq-page": { es: "Preguntas frecuentes", en: "Frequently asked questions" },
 };
 
 const SERVICE_LABELS: Record<string, { es: string; en: string }> = {
