@@ -9,13 +9,49 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TerminosDelServicioRouteImport } from './routes/terminos-del-servicio'
+import { Route as SolicitarDiagnosticoRouteImport } from './routes/solicitar-diagnostico'
 import { Route as ServiciosRouteImport } from './routes/servicios'
+import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
+import { Route as NosotrosRouteImport } from './routes/nosotros'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as AvisoDePrivacidadRouteImport } from './routes/aviso-de-privacidad'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en/index'
 
+const TerminosDelServicioRoute = TerminosDelServicioRouteImport.update({
+  id: '/terminos-del-servicio',
+  path: '/terminos-del-servicio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolicitarDiagnosticoRoute = SolicitarDiagnosticoRouteImport.update({
+  id: '/solicitar-diagnostico',
+  path: '/solicitar-diagnostico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServiciosRoute = ServiciosRouteImport.update({
   id: '/servicios',
   path: '/servicios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreguntasFrecuentesRoute = PreguntasFrecuentesRouteImport.update({
+  id: '/preguntas-frecuentes',
+  path: '/preguntas-frecuentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosotrosRoute = NosotrosRouteImport.update({
+  id: '/nosotros',
+  path: '/nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvisoDePrivacidadRoute = AvisoDePrivacidadRouteImport.update({
+  id: '/aviso-de-privacidad',
+  path: '/aviso-de-privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,41 +67,135 @@ const EnIndexRoute = EnIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aviso-de-privacidad': typeof AvisoDePrivacidadRoute
+  '/contacto': typeof ContactoRoute
+  '/nosotros': typeof NosotrosRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/servicios': typeof ServiciosRoute
+  '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
+  '/terminos-del-servicio': typeof TerminosDelServicioRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aviso-de-privacidad': typeof AvisoDePrivacidadRoute
+  '/contacto': typeof ContactoRoute
+  '/nosotros': typeof NosotrosRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/servicios': typeof ServiciosRoute
+  '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
+  '/terminos-del-servicio': typeof TerminosDelServicioRoute
   '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aviso-de-privacidad': typeof AvisoDePrivacidadRoute
+  '/contacto': typeof ContactoRoute
+  '/nosotros': typeof NosotrosRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/servicios': typeof ServiciosRoute
+  '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
+  '/terminos-del-servicio': typeof TerminosDelServicioRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/servicios' | '/en/'
+  fullPaths:
+    | '/'
+    | '/aviso-de-privacidad'
+    | '/contacto'
+    | '/nosotros'
+    | '/preguntas-frecuentes'
+    | '/servicios'
+    | '/solicitar-diagnostico'
+    | '/terminos-del-servicio'
+    | '/en/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/servicios' | '/en'
-  id: '__root__' | '/' | '/servicios' | '/en/'
+  to:
+    | '/'
+    | '/aviso-de-privacidad'
+    | '/contacto'
+    | '/nosotros'
+    | '/preguntas-frecuentes'
+    | '/servicios'
+    | '/solicitar-diagnostico'
+    | '/terminos-del-servicio'
+    | '/en'
+  id:
+    | '__root__'
+    | '/'
+    | '/aviso-de-privacidad'
+    | '/contacto'
+    | '/nosotros'
+    | '/preguntas-frecuentes'
+    | '/servicios'
+    | '/solicitar-diagnostico'
+    | '/terminos-del-servicio'
+    | '/en/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AvisoDePrivacidadRoute: typeof AvisoDePrivacidadRoute
+  ContactoRoute: typeof ContactoRoute
+  NosotrosRoute: typeof NosotrosRoute
+  PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
   ServiciosRoute: typeof ServiciosRoute
+  SolicitarDiagnosticoRoute: typeof SolicitarDiagnosticoRoute
+  TerminosDelServicioRoute: typeof TerminosDelServicioRoute
   EnIndexRoute: typeof EnIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terminos-del-servicio': {
+      id: '/terminos-del-servicio'
+      path: '/terminos-del-servicio'
+      fullPath: '/terminos-del-servicio'
+      preLoaderRoute: typeof TerminosDelServicioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solicitar-diagnostico': {
+      id: '/solicitar-diagnostico'
+      path: '/solicitar-diagnostico'
+      fullPath: '/solicitar-diagnostico'
+      preLoaderRoute: typeof SolicitarDiagnosticoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicios': {
       id: '/servicios'
       path: '/servicios'
       fullPath: '/servicios'
       preLoaderRoute: typeof ServiciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preguntas-frecuentes': {
+      id: '/preguntas-frecuentes'
+      path: '/preguntas-frecuentes'
+      fullPath: '/preguntas-frecuentes'
+      preLoaderRoute: typeof PreguntasFrecuentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nosotros': {
+      id: '/nosotros'
+      path: '/nosotros'
+      fullPath: '/nosotros'
+      preLoaderRoute: typeof NosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aviso-de-privacidad': {
+      id: '/aviso-de-privacidad'
+      path: '/aviso-de-privacidad'
+      fullPath: '/aviso-de-privacidad'
+      preLoaderRoute: typeof AvisoDePrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,7 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AvisoDePrivacidadRoute: AvisoDePrivacidadRoute,
+  ContactoRoute: ContactoRoute,
+  NosotrosRoute: NosotrosRoute,
+  PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
   ServiciosRoute: ServiciosRoute,
+  SolicitarDiagnosticoRoute: SolicitarDiagnosticoRoute,
+  TerminosDelServicioRoute: TerminosDelServicioRoute,
   EnIndexRoute: EnIndexRoute,
 }
 export const routeTree = rootRouteImport
