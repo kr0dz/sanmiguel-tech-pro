@@ -9,38 +9,332 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TerminosDelServicioRouteImport } from './routes/terminos-del-servicio'
+import { Route as SolicitarDiagnosticoRouteImport } from './routes/solicitar-diagnostico'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServiciosRouteImport } from './routes/servicios'
+import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
+import { Route as NosotrosRouteImport } from './routes/nosotros'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as AvisoDePrivacidadRouteImport } from './routes/aviso-de-privacidad'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EnIndexRouteImport } from './routes/en/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as EnTermsRouteImport } from './routes/en/terms'
+import { Route as EnServicesRouteImport } from './routes/en/services'
+import { Route as EnRequestDiagnosisRouteImport } from './routes/en/request-diagnosis'
+import { Route as EnPrivacyRouteImport } from './routes/en/privacy'
+import { Route as EnFaqRouteImport } from './routes/en/faq'
+import { Route as EnContactRouteImport } from './routes/en/contact'
+import { Route as EnAboutRouteImport } from './routes/en/about'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
+const TerminosDelServicioRoute = TerminosDelServicioRouteImport.update({
+  id: '/terminos-del-servicio',
+  path: '/terminos-del-servicio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolicitarDiagnosticoRoute = SolicitarDiagnosticoRouteImport.update({
+  id: '/solicitar-diagnostico',
+  path: '/solicitar-diagnostico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosRoute = ServiciosRouteImport.update({
+  id: '/servicios',
+  path: '/servicios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreguntasFrecuentesRoute = PreguntasFrecuentesRouteImport.update({
+  id: '/preguntas-frecuentes',
+  path: '/preguntas-frecuentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosotrosRoute = NosotrosRouteImport.update({
+  id: '/nosotros',
+  path: '/nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvisoDePrivacidadRoute = AvisoDePrivacidadRouteImport.update({
+  id: '/aviso-de-privacidad',
+  path: '/aviso-de-privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/en/',
+  path: '/en/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnTermsRoute = EnTermsRouteImport.update({
+  id: '/en/terms',
+  path: '/en/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnServicesRoute = EnServicesRouteImport.update({
+  id: '/en/services',
+  path: '/en/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnRequestDiagnosisRoute = EnRequestDiagnosisRouteImport.update({
+  id: '/en/request-diagnosis',
+  path: '/en/request-diagnosis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnPrivacyRoute = EnPrivacyRouteImport.update({
+  id: '/en/privacy',
+  path: '/en/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnFaqRoute = EnFaqRouteImport.update({
+  id: '/en/faq',
+  path: '/en/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnContactRoute = EnContactRouteImport.update({
+  id: '/en/contact',
+  path: '/en/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAboutRoute = EnAboutRouteImport.update({
+  id: '/en/about',
+  path: '/en/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aviso-de-privacidad': typeof AvisoDePrivacidadRoute
+  '/contacto': typeof ContactoRoute
+  '/nosotros': typeof NosotrosRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
+  '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
+  '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/contact': typeof EnContactRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/privacy': typeof EnPrivacyRoute
+  '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
+  '/en/services': typeof EnServicesRoute
+  '/en/terms': typeof EnTermsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aviso-de-privacidad': typeof AvisoDePrivacidadRoute
+  '/contacto': typeof ContactoRoute
+  '/nosotros': typeof NosotrosRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
+  '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
+  '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/contact': typeof EnContactRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/privacy': typeof EnPrivacyRoute
+  '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
+  '/en/services': typeof EnServicesRoute
+  '/en/terms': typeof EnTermsRoute
+  '/admin': typeof AdminIndexRoute
+  '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aviso-de-privacidad': typeof AvisoDePrivacidadRoute
+  '/contacto': typeof ContactoRoute
+  '/nosotros': typeof NosotrosRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
+  '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
+  '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/contact': typeof EnContactRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/privacy': typeof EnPrivacyRoute
+  '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
+  '/en/services': typeof EnServicesRoute
+  '/en/terms': typeof EnTermsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/aviso-de-privacidad'
+    | '/contacto'
+    | '/nosotros'
+    | '/preguntas-frecuentes'
+    | '/servicios'
+    | '/sitemap.xml'
+    | '/solicitar-diagnostico'
+    | '/terminos-del-servicio'
+    | '/admin/login'
+    | '/en/about'
+    | '/en/contact'
+    | '/en/faq'
+    | '/en/privacy'
+    | '/en/request-diagnosis'
+    | '/en/services'
+    | '/en/terms'
+    | '/admin/'
+    | '/en/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/aviso-de-privacidad'
+    | '/contacto'
+    | '/nosotros'
+    | '/preguntas-frecuentes'
+    | '/servicios'
+    | '/sitemap.xml'
+    | '/solicitar-diagnostico'
+    | '/terminos-del-servicio'
+    | '/admin/login'
+    | '/en/about'
+    | '/en/contact'
+    | '/en/faq'
+    | '/en/privacy'
+    | '/en/request-diagnosis'
+    | '/en/services'
+    | '/en/terms'
+    | '/admin'
+    | '/en'
+  id:
+    | '__root__'
+    | '/'
+    | '/aviso-de-privacidad'
+    | '/contacto'
+    | '/nosotros'
+    | '/preguntas-frecuentes'
+    | '/servicios'
+    | '/sitemap.xml'
+    | '/solicitar-diagnostico'
+    | '/terminos-del-servicio'
+    | '/admin/login'
+    | '/en/about'
+    | '/en/contact'
+    | '/en/faq'
+    | '/en/privacy'
+    | '/en/request-diagnosis'
+    | '/en/services'
+    | '/en/terms'
+    | '/admin/'
+    | '/en/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AvisoDePrivacidadRoute: typeof AvisoDePrivacidadRoute
+  ContactoRoute: typeof ContactoRoute
+  NosotrosRoute: typeof NosotrosRoute
+  PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
+  ServiciosRoute: typeof ServiciosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SolicitarDiagnosticoRoute: typeof SolicitarDiagnosticoRoute
+  TerminosDelServicioRoute: typeof TerminosDelServicioRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  EnAboutRoute: typeof EnAboutRoute
+  EnContactRoute: typeof EnContactRoute
+  EnFaqRoute: typeof EnFaqRoute
+  EnPrivacyRoute: typeof EnPrivacyRoute
+  EnRequestDiagnosisRoute: typeof EnRequestDiagnosisRoute
+  EnServicesRoute: typeof EnServicesRoute
+  EnTermsRoute: typeof EnTermsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  EnIndexRoute: typeof EnIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terminos-del-servicio': {
+      id: '/terminos-del-servicio'
+      path: '/terminos-del-servicio'
+      fullPath: '/terminos-del-servicio'
+      preLoaderRoute: typeof TerminosDelServicioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solicitar-diagnostico': {
+      id: '/solicitar-diagnostico'
+      path: '/solicitar-diagnostico'
+      fullPath: '/solicitar-diagnostico'
+      preLoaderRoute: typeof SolicitarDiagnosticoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios': {
+      id: '/servicios'
+      path: '/servicios'
+      fullPath: '/servicios'
+      preLoaderRoute: typeof ServiciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preguntas-frecuentes': {
+      id: '/preguntas-frecuentes'
+      path: '/preguntas-frecuentes'
+      fullPath: '/preguntas-frecuentes'
+      preLoaderRoute: typeof PreguntasFrecuentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nosotros': {
+      id: '/nosotros'
+      path: '/nosotros'
+      fullPath: '/nosotros'
+      preLoaderRoute: typeof NosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aviso-de-privacidad': {
+      id: '/aviso-de-privacidad'
+      path: '/aviso-de-privacidad'
+      fullPath: '/aviso-de-privacidad'
+      preLoaderRoute: typeof AvisoDePrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +342,100 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/': {
+      id: '/en/'
+      path: '/en'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/terms': {
+      id: '/en/terms'
+      path: '/en/terms'
+      fullPath: '/en/terms'
+      preLoaderRoute: typeof EnTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/services': {
+      id: '/en/services'
+      path: '/en/services'
+      fullPath: '/en/services'
+      preLoaderRoute: typeof EnServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/request-diagnosis': {
+      id: '/en/request-diagnosis'
+      path: '/en/request-diagnosis'
+      fullPath: '/en/request-diagnosis'
+      preLoaderRoute: typeof EnRequestDiagnosisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/privacy': {
+      id: '/en/privacy'
+      path: '/en/privacy'
+      fullPath: '/en/privacy'
+      preLoaderRoute: typeof EnPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/faq': {
+      id: '/en/faq'
+      path: '/en/faq'
+      fullPath: '/en/faq'
+      preLoaderRoute: typeof EnFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/contact': {
+      id: '/en/contact'
+      path: '/en/contact'
+      fullPath: '/en/contact'
+      preLoaderRoute: typeof EnContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/about': {
+      id: '/en/about'
+      path: '/en/about'
+      fullPath: '/en/about'
+      preLoaderRoute: typeof EnAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AvisoDePrivacidadRoute: AvisoDePrivacidadRoute,
+  ContactoRoute: ContactoRoute,
+  NosotrosRoute: NosotrosRoute,
+  PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
+  ServiciosRoute: ServiciosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SolicitarDiagnosticoRoute: SolicitarDiagnosticoRoute,
+  TerminosDelServicioRoute: TerminosDelServicioRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  EnAboutRoute: EnAboutRoute,
+  EnContactRoute: EnContactRoute,
+  EnFaqRoute: EnFaqRoute,
+  EnPrivacyRoute: EnPrivacyRoute,
+  EnRequestDiagnosisRoute: EnRequestDiagnosisRoute,
+  EnServicesRoute: EnServicesRoute,
+  EnTermsRoute: EnTermsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  EnIndexRoute: EnIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
