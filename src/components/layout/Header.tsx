@@ -6,28 +6,29 @@ import { cn } from "@/lib/utils";
 
 function navItems(locale: Locale) {
   const t = tFor(locale).nav;
-  const base = locale === "es"
+  return locale === "es"
     ? [
         { to: "/", label: t.home },
         { to: "/servicios", label: t.services, hash: "" },
-        { to: "/servicios", label: t.apple, hash: "#apple" },
-        { to: "/servicios", label: t.upgrades, hash: "#upgrades" },
-        { to: "/servicios", label: t.business, hash: "#negocios" },
-        { to: "/servicios", label: t.remote, hash: "#remoto" },
+        { to: "/servicios", label: t.apple, hash: "apple" },
+        { to: "/servicios", label: t.upgrades, hash: "upgrades" },
+        { to: "/instalacion-de-programas-san-miguel-de-allende", label: t.software },
+        { to: "/servicios", label: t.business, hash: "negocios" },
+        { to: "/servicios", label: t.remote, hash: "remoto" },
         { to: "/nosotros", label: t.about },
         { to: "/contacto", label: t.contact },
       ]
     : [
         { to: "/en", label: t.home },
         { to: "/en/services", label: t.services, hash: "" },
-        { to: "/en/services", label: t.apple, hash: "#apple" },
-        { to: "/en/services", label: t.upgrades, hash: "#upgrades" },
-        { to: "/en/services", label: t.business, hash: "#business" },
-        { to: "/en/services", label: t.remote, hash: "#remote" },
+        { to: "/en/services", label: t.apple, hash: "apple" },
+        { to: "/en/services", label: t.upgrades, hash: "upgrades" },
+        { to: "/en/software-installation-san-miguel-de-allende", label: t.software },
+        { to: "/en/services", label: t.business, hash: "business" },
+        { to: "/en/services", label: t.remote, hash: "remote" },
         { to: "/en/about", label: t.about },
         { to: "/en/contact", label: t.contact },
       ];
-  return base;
 }
 
 export function Header() {
@@ -49,13 +50,13 @@ export function Header() {
           San Miguel <span className="text-brand">Tech</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 text-sm">
-          {items.map((item, i) => (
+        <nav className="hidden xl:flex items-center gap-1 text-sm" aria-label={locale === "es" ? "Navegación principal" : "Main navigation"}>
+          {items.map((item) => (
             <Link
-              key={i}
+              key={`${item.to}-${"hash" in item ? item.hash : item.label}`}
               to={item.to}
               hash={"hash" in item ? item.hash : undefined}
-              className="px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
+              className="px-2.5 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
               activeOptions={{ exact: true }}
               activeProps={{ className: "text-foreground" }}
             >
@@ -80,9 +81,9 @@ export function Header() {
             {t.nav.cta}
           </Link>
           <button
-            className="lg:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-foreground"
+            className="xl:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-foreground"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Menu"
+            aria-label={locale === "es" ? "Abrir menú" : "Open menu"}
             aria-expanded={open}
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -91,11 +92,11 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background">
+        <div className="xl:hidden border-t border-border bg-background">
           <div className="container-page py-3 flex flex-col gap-1 text-sm">
-            {items.map((item, i) => (
+            {items.map((item) => (
               <Link
-                key={i}
+                key={`${item.to}-${"hash" in item ? item.hash : item.label}`}
                 to={item.to}
                 hash={"hash" in item ? item.hash : undefined}
                 onClick={() => setOpen(false)}
