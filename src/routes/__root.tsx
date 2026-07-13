@@ -91,9 +91,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Reparación, upgrades y soporte tecnológico para equipos Apple, computadoras Windows, hogares y negocios en San Miguel de Allende.",
+          "Reparación, upgrades, instalación de programas y soporte tecnológico para equipos Apple, Windows, hogares y negocios en San Miguel de Allende.",
       },
       { name: "author", content: SITE.name },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "theme-color", content: "#176b80" },
       { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_MX" },
