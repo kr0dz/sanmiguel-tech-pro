@@ -7,7 +7,7 @@ const path = "/servicios";
 const title = "Servicios de Soporte Técnico en San Miguel de Allende";
 const description = "Reparación de computadoras, soporte Apple, upgrades, instalación de programas, Wi-Fi y soporte remoto o a domicilio en San Miguel de Allende.";
 
-export const Route = createFileRoute(path)({
+export const Route = createFileRoute("/servicios")({
   component: () => <SiteShell><ServicesPage locale="es" /></SiteShell>,
   head: () => ({
     meta: [
