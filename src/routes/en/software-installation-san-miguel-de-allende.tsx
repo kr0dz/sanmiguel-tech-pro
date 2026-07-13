@@ -5,8 +5,8 @@ import { SITE, absoluteUrl } from "@/lib/site";
 
 const path = "/en/software-installation-san-miguel-de-allende";
 const spanishPath = "/instalacion-de-programas-san-miguel-de-allende";
-const title = "Software Installation in San Miguel de Allende | San Miguel Tech";
-const description = "Software installation and setup for Windows and Mac in San Miguel de Allende. Office, antivirus, drivers and remote or on-site support.";
+const title = "Remote Software Installation in San Miguel de Allende";
+const description = "Remote installation of Soft Restaurant 10, Office, Microsoft 365, AutoCAD, SketchUp, Adobe and other Windows or Mac programs.";
 
 export const Route = createFileRoute("/en/software-installation-san-miguel-de-allende")({
   component: () => (
@@ -40,17 +40,14 @@ export const Route = createFileRoute("/en/software-installation-san-miguel-de-al
             {
               "@type": "Service",
               "@id": `${absoluteUrl(path)}#service`,
-              name: "Software installation in San Miguel de Allende",
-              serviceType: "Software installation and configuration for Windows and macOS",
+              name: "Remote software installation in San Miguel de Allende",
+              serviceType: "Remote software installation and configuration for Windows and macOS",
               description,
               url: absoluteUrl(path),
               areaServed: {
                 "@type": "City",
                 name: SITE.locality,
-                containedInPlace: {
-                  "@type": "State",
-                  name: SITE.region,
-                },
+                containedInPlace: { "@type": "State", name: SITE.region },
               },
               provider: {
                 "@type": "LocalBusiness",
@@ -61,10 +58,19 @@ export const Route = createFileRoute("/en/software-installation-san-miguel-de-al
               availableChannel: [
                 {
                   "@type": "ServiceChannel",
-                  serviceUrl: absoluteUrl("/en/request-diagnosis"),
+                  serviceUrl: absoluteUrl("/en/request-diagnosis?source=software-page&service=software-installation"),
                   availableLanguage: ["en", "es"],
+                  serviceLocation: { "@type": "VirtualLocation", url: absoluteUrl(path) },
                 },
               ],
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Programs and applications",
+                itemListElement: ["Soft Restaurant 10", "Microsoft Office", "Microsoft 365", "AutoCAD", "SketchUp", "Adobe Acrobat"].map((name) => ({
+                  "@type": "Offer",
+                  itemOffered: { "@type": "Service", name: `Remote installation of ${name}` },
+                })),
+              },
             },
             {
               "@type": "FAQPage",
@@ -72,10 +78,7 @@ export const Route = createFileRoute("/en/software-installation-san-miguel-de-al
               mainEntity: SOFTWARE_FAQ.en.map((item) => ({
                 "@type": "Question",
                 name: item.q,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: item.a,
-                },
+                acceptedAnswer: { "@type": "Answer", text: item.a },
               })),
             },
           ],
