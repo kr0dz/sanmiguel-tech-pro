@@ -1,31 +1,41 @@
-// Editable business information. Placeholders marked with TODO must be replaced
-// with real data provided by the business owner before going live.
+import type { Locale } from "@/i18n/dict";
+
 export const SITE = {
   name: "San Miguel Tech",
   domain: "sanmigueldeallende.tech",
   baseUrl: "https://sanmigueldeallende.tech",
-  // TODO(owner): Replace with real WhatsApp number in international format (52...).
-  whatsapp: "5210000000000",
-  // TODO(owner): Replace with real phone number.
-  phone: "+52 000 000 0000",
-  // TODO(owner): Replace with real contact email.
-  email: "hola@sanmigueldeallende.tech",
   serviceArea: "San Miguel de Allende, Guanajuato, México",
-  // TODO(owner): Replace with real geo coordinates when defined.
-  geo: { lat: 20.9153, lng: -100.7439 },
-  hours: [
-    // TODO(owner): Confirm real business hours.
-    { day: "Mo-Fr", opens: "09:00", closes: "19:00" },
-    { day: "Sa", opens: "10:00", closes: "15:00" },
-  ],
+  locality: "San Miguel de Allende",
+  region: "Guanajuato",
+  country: "MX",
+  languages: ["es", "en"],
   social: {
-    // TODO(owner): Add real social profiles.
     facebook: "",
     instagram: "",
   },
 } as const;
 
-export function whatsappUrl(message: string): string {
-  const number = SITE.whatsapp.replace(/\D/g, "");
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+/**
+ * Keeps the private WhatsApp number out of public HTML and browser bundles.
+ * The /whatsapp server route reads PRIVATE_WHATSAPP_NUMBER and redirects.
+ */
+export function whatsappPath(message: string): string {
+  return `/whatsapp?text=${encodeURIComponent(message)}`;
+}
+
+// Backward-compatible name for components that have not yet been renamed.
+export const whatsappUrl = whatsappPath;
+
+export function absoluteUrl(path = "/"): string {
+  return new URL(path, SITE.baseUrl).toString();
+}
+
+export function diagnosisHref(
+  locale: Locale,
+  source: string,
+  service = "general",
+): string {
+  const pathname = locale === "es" ? "/solicitar-diagnostico" : "/en/request-diagnosis";
+  const params = new URLSearchParams({ source, service });
+  return `${pathname}?${params.toString()}`;
 }

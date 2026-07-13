@@ -22,27 +22,27 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "py-20 md:py-24",
+        "scroll-mt-20 py-14 sm:py-16 md:py-24",
         tone === "graphite" && "bg-graphite text-graphite-foreground",
-        tone === "soft" && "bg-muted/60",
+        tone === "soft" && "bg-[#f5f5f7]",
         className,
       )}
     >
       <div className="container-page">
         {(eyebrow || title || lede) && (
-          <div className="max-w-2xl mb-10 md:mb-14">
+          <div className="mb-8 max-w-3xl md:mb-12">
             {eyebrow && (
-              <div className={cn("text-xs font-medium tracking-[0.18em] uppercase mb-3", tone === "graphite" ? "text-brand-soft" : "text-brand")}>
+              <div className={cn("mb-3 text-[11px] font-semibold uppercase tracking-[0.2em]", tone === "graphite" ? "text-brand-soft" : "text-brand")}>
                 {eyebrow}
               </div>
             )}
             {title && (
-              <h2 className={cn("text-3xl md:text-[40px] leading-[1.1] font-semibold tracking-tight", tone === "graphite" ? "text-graphite-foreground" : "text-foreground")}>
+              <h2 className={cn("text-[32px] font-semibold leading-[1.05] sm:text-4xl md:text-[48px]", tone === "graphite" ? "text-graphite-foreground" : "text-foreground")}>
                 {title}
               </h2>
             )}
             {lede && (
-              <p className={cn("mt-4 text-base md:text-lg", tone === "graphite" ? "text-graphite-foreground/75" : "text-muted-foreground")}>
+              <p className={cn("mt-4 max-w-2xl text-base leading-relaxed sm:text-lg", tone === "graphite" ? "text-graphite-foreground/72" : "text-muted-foreground")}>
                 {lede}
               </p>
             )}

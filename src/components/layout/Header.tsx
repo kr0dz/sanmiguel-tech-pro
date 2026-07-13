@@ -1,125 +1,117 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  Apple,
+  Building2,
+  ChevronDown,
+  Download,
+  MemoryStick,
+  Menu,
+  MonitorSmartphone,
+  Wifi,
+  Wrench,
+  X,
+} from "lucide-react";
 import { tFor, localeFromPath, alternatePath, type Locale } from "@/i18n/dict";
-import { cn } from "@/lib/utils";
+import { diagnosisHref } from "@/lib/site";
 
-function navItems(locale: Locale) {
-  const t = tFor(locale).nav;
-  const base = locale === "es"
-    ? [
-        { to: "/", label: t.home },
-        { to: "/servicios", label: t.services, hash: "" },
-        { to: "/servicios", label: t.apple, hash: "#apple" },
-        { to: "/servicios", label: t.upgrades, hash: "#upgrades" },
-        { to: "/servicios", label: t.business, hash: "#negocios" },
-        { to: "/servicios", label: t.remote, hash: "#remoto" },
-        { to: "/nosotros", label: t.about },
-        { to: "/contacto", label: t.contact },
-      ]
-    : [
-        { to: "/en", label: t.home },
-        { to: "/en/services", label: t.services, hash: "" },
-        { to: "/en/services", label: t.apple, hash: "#apple" },
-        { to: "/en/services", label: t.upgrades, hash: "#upgrades" },
-        { to: "/en/services", label: t.business, hash: "#business" },
-        { to: "/en/services", label: t.remote, hash: "#remote" },
-        { to: "/en/about", label: t.about },
-        { to: "/en/contact", label: t.contact },
-      ];
-  return base;
+function serviceItems(locale: Locale) {
+  const isES = locale === "es";
+  const services = isES ? "/servicios" : "/en/services";
+  return [
+    { icon: Apple, href: `${services}#apple`, title: "Apple", text: isES ? "MacBook, iMac, iPhone y iPad" : "MacBook, iMac, iPhone and iPad" },
+    { icon: MemoryStick, href: `${services}#upgrades`, title: isES ? "Computadoras y upgrades" : "Computers and upgrades", text: isES ? "SSD, RAM, optimización y componentes" : "SSD, RAM, optimization and components" },
+    { icon: Download, href: isES ? "/instalacion-de-programas-san-miguel-de-allende" : "/en/software-installation-san-miguel-de-allende", title: isES ? "Instalación de programas" : "Software installation", text: isES ? "Office, AutoCAD, Soft Restaurant 10 y más" : "Office, AutoCAD, Soft Restaurant 10 and more" },
+    { icon: Wrench, href: `${services}#${isES ? "reparacion" : "repair"}`, title: isES ? "Diagnóstico y reparación" : "Diagnosis and repair", text: isES ? "Fallas de hardware, sistema y rendimiento" : "Hardware, system and performance issues" },
+    { icon: MonitorSmartphone, href: `${services}#${isES ? "remoto" : "remote"}`, title: isES ? "Soporte remoto" : "Remote support", text: isES ? "Configuración y solución sin trasladar el equipo" : "Setup and troubleshooting without moving the device" },
+    { icon: Wifi, href: `${services}#wifi`, title: isES ? "Wi-Fi y hogar" : "Wi-Fi and home", text: isES ? "Redes, impresoras, Smart TV y conectividad" : "Networks, printers, Smart TVs and connectivity" },
+    { icon: Building2, href: `${services}#${isES ? "negocios" : "business"}`, title: isES ? "Tecnología para negocios" : "Technology for businesses", text: isES ? "Oficinas, hoteles y rentas vacacionales" : "Offices, hotels and vacation rentals" },
+  ];
 }
 
 export function Header() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const locale = localeFromPath(pathname);
+  const isES = locale === "es";
   const t = tFor(locale);
-  const items = navItems(locale);
-  const [open, setOpen] = useState(false);
-  const diagnosisTo = locale === "es" ? "/solicitar-diagnostico" : "/en/request-diagnosis";
+  const services = serviceItems(locale);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const altHref = alternatePath(locale, pathname);
+  const diagnosis = diagnosisHref(locale, "header", "general");
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  }, [pathname]);
+
+  const mainItems = isES
+    ? [{ href: "/", label: "Inicio" }, { href: "/nosotros", label: "Nosotros" }, { href: "/contacto", label: "Contacto" }]
+    : [{ href: "/en", label: "Home" }, { href: "/en/about", label: "About" }, { href: "/en/contact", label: "Contact" }];
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur bg-background/85 border-b border-border/70">
-      <div className="container-page flex items-center justify-between h-16 gap-4">
-        <Link
-          to={locale === "es" ? "/" : "/en"}
-          className="font-semibold text-[17px] tracking-tight text-foreground"
-        >
+    <header className="sticky top-0 z-50 border-b border-black/[0.06] bg-background/82 backdrop-blur-2xl supports-[backdrop-filter]:bg-background/72">
+      <div className="container-page flex h-14 items-center justify-between gap-4 md:h-16">
+        <Link to={isES ? "/" : "/en"} className="text-[17px] font-semibold tracking-[-0.025em] text-foreground">
           San Miguel <span className="text-brand">Tech</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 text-sm">
-          {items.map((item, i) => (
-            <Link
-              key={i}
-              to={item.to}
-              hash={"hash" in item ? item.hash : undefined}
-              className="px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
-              activeOptions={{ exact: true }}
-              activeProps={{ className: "text-foreground" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-1 lg:flex" aria-label={isES ? "Navegación principal" : "Main navigation"}>
+          <Link to={isES ? "/" : "/en"} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition hover:bg-black/[0.04] hover:text-foreground">
+            {isES ? "Inicio" : "Home"}
+          </Link>
+
+          <div className="relative">
+            <button type="button" onClick={() => setServicesOpen((value) => !value)} className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm text-muted-foreground transition hover:bg-black/[0.04] hover:text-foreground" aria-expanded={servicesOpen} aria-haspopup="true">
+              {isES ? "Servicios" : "Services"}
+              <ChevronDown className={`h-3.5 w-3.5 transition ${servicesOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {servicesOpen && (
+              <div className="absolute left-1/2 top-[calc(100%+0.75rem)] w-[720px] -translate-x-1/2 rounded-[28px] border border-black/[0.07] bg-white/95 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-2xl">
+                <div className="grid grid-cols-2 gap-1">
+                  {services.map(({ icon: Icon, href, title, text }) => (
+                    <a key={href} href={href} onClick={() => setServicesOpen(false)} className="group flex items-start gap-3 rounded-[20px] p-4 transition hover:bg-[#f5f5f7]">
+                      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#f2f2f4] text-brand transition group-hover:bg-white"><Icon className="h-5 w-5" /></span>
+                      <span><span className="block text-sm font-semibold text-foreground">{title}</span><span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{text}</span></span>
+                    </a>
+                  ))}
+                </div>
+                <a href={isES ? "/servicios" : "/en/services"} onClick={() => setServicesOpen(false)} className="mt-2 flex items-center justify-between rounded-[20px] bg-[#f5f5f7] px-5 py-3 text-sm font-medium text-foreground">
+                  {isES ? "Ver todos los servicios" : "View all services"}<span className="text-brand">→</span>
+                </a>
+              </div>
+            )}
+          </div>
+
+          {mainItems.slice(1).map((item) => <a key={item.href} href={item.href} className="rounded-full px-4 py-2 text-sm text-muted-foreground transition hover:bg-black/[0.04] hover:text-foreground">{item.label}</a>)}
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={altHref}
-            className="hidden sm:inline-flex items-center justify-center h-9 px-3 rounded-md border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent/40 transition"
-            hrefLang={locale === "es" ? "en" : "es"}
-            aria-label={locale === "es" ? "Switch to English" : "Cambiar a español"}
-          >
-            {t.nav.lang}
-          </a>
-          <Link
-            to={diagnosisTo}
-            className="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-md bg-brand text-brand-foreground text-sm font-medium shadow-sm hover:opacity-95 transition"
-          >
-            {t.nav.cta}
-          </Link>
-          <button
-            className="lg:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-border text-foreground"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Menu"
-            aria-expanded={open}
-          >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          <a href={altHref} hrefLang={isES ? "en" : "es"} className="hidden h-9 items-center justify-center rounded-full border border-black/[0.08] px-3 text-xs font-medium text-muted-foreground transition hover:bg-white sm:inline-flex">{t.nav.lang}</a>
+          <a href={diagnosis} className="hidden h-10 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-white shadow-sm transition hover:brightness-95 sm:inline-flex">{t.nav.cta}</a>
+          <button type="button" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.08] bg-white/70 text-foreground lg:hidden" onClick={() => setMobileOpen((value) => !value)} aria-label={isES ? "Abrir menú" : "Open menu"} aria-expanded={mobileOpen}>
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {open && (
-        <div className="lg:hidden border-t border-border bg-background">
-          <div className="container-page py-3 flex flex-col gap-1 text-sm">
-            {items.map((item, i) => (
-              <Link
-                key={i}
-                to={item.to}
-                hash={"hash" in item ? item.hash : undefined}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50",
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="flex items-center gap-2 pt-2">
-              <a
-                href={altHref}
-                className="inline-flex items-center justify-center h-10 px-3 rounded-md border border-border text-sm text-muted-foreground"
-              >
-                {t.nav.lang}
-              </a>
-              <Link
-                to={diagnosisTo}
-                onClick={() => setOpen(false)}
-                className="flex-1 inline-flex items-center justify-center h-10 rounded-md bg-brand text-brand-foreground text-sm font-medium"
-              >
-                {t.nav.cta}
-              </Link>
+      {mobileOpen && (
+        <div className="border-t border-black/[0.06] bg-[#f5f5f7]/98 lg:hidden">
+          <div className="container-page max-h-[calc(100dvh-3.5rem)] overflow-y-auto py-4 pb-28">
+            <div className="rounded-[24px] bg-white p-2 shadow-sm">
+              <a href={isES ? "/" : "/en"} className="block rounded-2xl px-4 py-3 text-base font-medium">{isES ? "Inicio" : "Home"}</a>
+              <details className="group">
+                <summary className="flex cursor-pointer list-none items-center justify-between rounded-2xl px-4 py-3 text-base font-medium">{isES ? "Servicios" : "Services"}<ChevronDown className="h-4 w-4 transition group-open:rotate-180" /></summary>
+                <div className="grid gap-1 px-2 pb-2 sm:grid-cols-2">
+                  {services.map(({ icon: Icon, href, title }) => <a key={href} href={href} className="flex items-center gap-3 rounded-2xl bg-[#f5f5f7] px-3 py-3 text-sm"><Icon className="h-4 w-4 text-brand" />{title}</a>)}
+                </div>
+              </details>
+              {mainItems.slice(1).map((item) => <a key={item.href} href={item.href} className="block rounded-2xl px-4 py-3 text-base font-medium">{item.label}</a>)}
+            </div>
+            <div className="mt-3 grid grid-cols-[auto_1fr] gap-2">
+              <a href={altHref} className="inline-flex h-12 items-center justify-center rounded-full border border-black/[0.08] bg-white px-4 text-sm font-medium">{t.nav.lang}</a>
+              <a href={diagnosis} className="inline-flex h-12 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-white">{t.nav.cta}</a>
             </div>
           </div>
         </div>

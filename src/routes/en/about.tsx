@@ -1,21 +1,51 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { AboutPage } from "@/components/pages/AboutPage";
+import { SITE, absoluteUrl } from "@/lib/site";
+
+const path = "/en/about";
+const spanishPath = "/nosotros";
+const title = "Local Tech Support in San Miguel de Allende | San Miguel Tech";
+const description = "Meet San Miguel Tech, an independent bilingual technology service for residents, families, businesses, hotels and vacation rentals in San Miguel de Allende.";
 
 export const Route = createFileRoute("/en/about")({
   component: () => <SiteShell><AboutPage locale="en" /></SiteShell>,
   head: () => ({
     meta: [
-      { title: "About | San Miguel Tech" },
-      { name: "description", content: "Independent tech service in San Miguel de Allende with experience across Apple, Windows, networks and business systems." },
-      { property: "og:title", content: "About | San Miguel Tech" },
-      { property: "og:description", content: "Trusted independent tech service in San Miguel de Allende." },
-      { property: "og:url", content: "/en/about" },
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:url", content: absoluteUrl(path) },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
     links: [
-      { rel: "canonical", href: "/en/about" },
-      { rel: "alternate", hrefLang: "es", href: "/nosotros" },
-      { rel: "alternate", hrefLang: "en", href: "/en/about" },
+      { rel: "canonical", href: absoluteUrl(path) },
+      { rel: "alternate", hrefLang: "es-MX", href: absoluteUrl(spanishPath) },
+      { rel: "alternate", hrefLang: "en", href: absoluteUrl(path) },
+      { rel: "alternate", hrefLang: "x-default", href: absoluteUrl(spanishPath) },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "@id": `${absoluteUrl(path)}#about`,
+          url: absoluteUrl(path),
+          name: title,
+          description,
+          about: {
+            "@type": "LocalBusiness",
+            "@id": `${SITE.baseUrl}/#business`,
+            name: SITE.name,
+            url: SITE.baseUrl,
+            areaServed: SITE.locality,
+          },
+        }),
+      },
     ],
   }),
 });

@@ -6,9 +6,9 @@ import { WhatsAppFab } from "./WhatsAppFab";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main id="main" className="flex-1 pb-16 lg:pb-0">
+      <main id="main" className="flex-1 pb-24 lg:pb-0">
         {children}
       </main>
       <Footer />
