@@ -119,36 +119,36 @@ export function DiagnosisForm({ locale }: { locale: Locale }) {
       setErrorMsg(isES ? "Revisa los campos requeridos." : "Please review the required fields.");
       return;
     }
+
     const p = parsed.data;
-    const { data, error } = await supabase
-      .from("service_requests")
-      .insert({
-        customer_name: p.customer_name,
-        whatsapp: p.whatsapp,
-        email: p.email || null,
-        preferred_language: p.preferred_language,
-        customer_type: p.customer_type,
-        device_type: p.device_type,
-        brand: p.brand || null,
-        model: p.model || null,
-        operating_system: p.operating_system || null,
-        issue_description: p.issue_description,
-        issue_start: p.issue_start || null,
-        powers_on: p.powers_on || null,
-        important_data: p.important_data || null,
-        service_mode: p.service_mode,
-        neighborhood: p.neighborhood || null,
-        urgency: p.urgency || null,
-        preferred_date: p.preferred_date || null,
-      })
-      .select("request_number")
-      .single();
+    const { data, error } = await supabase.rpc("submit_service_request", {
+      p_customer_name: p.customer_name,
+      p_whatsapp: p.whatsapp,
+      p_customer_type: p.customer_type,
+      p_device_type: p.device_type,
+      p_issue_description: p.issue_description,
+      p_service_mode: p.service_mode,
+      p_email: p.email || null,
+      p_preferred_language: p.preferred_language,
+      p_brand: p.brand || null,
+      p_model: p.model || null,
+      p_operating_system: p.operating_system || null,
+      p_issue_start: p.issue_start || null,
+      p_powers_on: p.powers_on || null,
+      p_important_data: p.important_data || null,
+      p_neighborhood: p.neighborhood || null,
+      p_urgency: p.urgency || null,
+      p_preferred_date: p.preferred_date || null,
+    });
+
     if (error || !data) {
+      console.error("Service request submission failed", error);
       setState("error");
       setErrorMsg(L.errorGeneric);
       return;
     }
-    setRequestNumber(data.request_number);
+
+    setRequestNumber(data);
     setState("success");
   }
 
