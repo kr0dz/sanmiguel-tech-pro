@@ -21,6 +21,9 @@ export function whatsappPath(message: string): string {
   return `/whatsapp?text=${encodeURIComponent(message)}`;
 }
 
+// Backward-compatible name for components that have not yet been renamed.
+export const whatsappUrl = whatsappPath;
+
 export function absoluteUrl(path = "/"): string {
   return new URL(path, SITE.baseUrl).toString();
 }
