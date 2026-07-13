@@ -33,7 +33,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to={isES ? "/" : "/en"}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-95"
           >
             {isES ? "Ir al inicio" : "Go home"}
           </Link>
@@ -66,13 +66,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:brightness-95"
           >
             {isES ? "Intentar de nuevo" : "Try again"}
           </button>
           <a
             href={isES ? "/" : "/en"}
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-full border border-input bg-background px-5 py-2.5 text-sm font-medium text-foreground transition hover:bg-accent"
           >
             {isES ? "Ir al inicio" : "Go home"}
           </a>
@@ -86,16 +86,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "San Miguel Tech · Técnico en San Miguel de Allende" },
       {
         name: "description",
         content:
-          "Reparación, upgrades, instalación de programas y soporte tecnológico para equipos Apple, Windows, hogares y negocios en San Miguel de Allende.",
+          "Reparación, upgrades, instalación remota de programas y soporte tecnológico para Apple, Windows, hogares y negocios en San Miguel de Allende.",
       },
       { name: "author", content: SITE.name },
       { name: "robots", content: "index, follow, max-image-preview:large" },
-      { name: "theme-color", content: "#176b80" },
+      { name: "theme-color", content: "#f5f5f7" },
+      { name: "color-scheme", content: "light" },
       { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_MX" },
@@ -103,24 +104,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.googleapis.com",
-      },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "shortcut icon", href: "/favicon.svg" },
+      { rel: "mask-icon", href: "/favicon.svg", color: "#0071e3" },
     ],
   }),
   shellComponent: RootShell,
