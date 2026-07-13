@@ -2,20 +2,23 @@ import { Link } from "@tanstack/react-router";
 import {
   Gauge, HardDrive, Cpu, MemoryStick, ShieldCheck, Wifi, Printer,
   Settings, Bug, Building2, ArrowRight, CheckCircle2, Apple,
-  Wrench, Home, MonitorSmartphone,
+  Wrench, Home, MonitorSmartphone, Download,
 } from "lucide-react";
 import { tFor, type Locale } from "@/i18n/dict";
 import { Section } from "@/components/ui/Section";
-import { whatsappUrl } from "@/lib/site";
+import { whatsappPath } from "@/lib/site";
 import heroImg from "@/assets/hero-workbench.jpg";
 
-const PROBLEM_ICONS = [Gauge, Apple, MemoryStick, HardDrive, ShieldCheck, Wifi, Printer, Settings, Bug, Building2];
+const PROBLEM_ICONS = [Gauge, Apple, MemoryStick, HardDrive, ShieldCheck, Wifi, Printer, Download, Settings, Bug, Building2];
 
 export function HomePage({ locale }: { locale: Locale }) {
   const t = tFor(locale);
   const isES = locale === "es";
   const diagPath = isES ? "/solicitar-diagnostico" : "/en/request-diagnosis";
   const servicesPath = isES ? "/servicios" : "/en/services";
+  const softwarePath = isES
+    ? "/instalacion-de-programas-san-miguel-de-allende"
+    : "/en/software-installation-san-miguel-de-allende";
   const waMsg = isES
     ? "Hola San Miguel Tech, quiero solicitar un diagnóstico."
     : "Hi San Miguel Tech, I'd like to request a diagnosis.";
@@ -34,7 +37,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               <Link to={diagPath} className="inline-flex items-center justify-center h-12 px-6 rounded-md bg-brand text-brand-foreground text-sm font-medium shadow-sm hover:opacity-95 transition">
                 {t.hero.ctaPrimary} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <a href={whatsappUrl(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-12 px-6 rounded-md border border-border text-foreground text-sm font-medium hover:bg-accent/50 transition">
+              <a href={whatsappPath(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-12 px-6 rounded-md border border-border text-foreground text-sm font-medium hover:bg-accent/50 transition">
                 {t.hero.ctaWhatsapp}
               </a>
             </div>
@@ -48,7 +51,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-border shadow-[0_20px_60px_-25px_oklch(0.35_0.05_240/0.35)]">
-              <img src={heroImg} alt={isES ? "Mesa de trabajo con MacBook, computadora abierta y herramientas de precisión" : "Workbench with a MacBook, an open desktop and precision tools"} width={1600} height={1200} className="w-full h-full object-cover" />
+              <img src={heroImg} alt={isES ? "Mesa de trabajo de servicio técnico con MacBook, computadora abierta y herramientas de precisión" : "Technical service workbench with a MacBook, open desktop and precision tools"} width={1600} height={1200} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -58,8 +61,9 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {t.problems.items.map((label, i) => {
             const Icon = PROBLEM_ICONS[i] ?? Cpu;
+            const target = label.toLowerCase().includes(isES ? "programa" : "software") ? softwarePath : diagPath;
             return (
-              <Link key={label} to={diagPath} className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 hover:border-brand/60 hover:shadow-sm transition">
+              <Link key={label} to={target} className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 hover:border-brand/60 hover:shadow-sm transition">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft text-brand shrink-0">
                   <Icon className="h-5 w-5" />
                 </span>
@@ -70,15 +74,16 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </Section>
 
-      <Section eyebrow={isES ? "SERVICIOS" : "SERVICES"} title={isES ? "Soluciones integrales de tecnología" : "End-to-end technology solutions"} lede={isES ? "Apple, Windows, redes y equipos de negocios — un solo técnico de confianza para lo que necesites resolver." : "Apple, Windows, networks and business systems — one trusted technician for whatever you need to fix."}>
+      <Section eyebrow={isES ? "SERVICIOS" : "SERVICES"} title={isES ? "Soluciones integrales de tecnología" : "End-to-end technology solutions"} lede={isES ? "Apple, Windows, instalación de programas, redes y equipos de negocios: un solo técnico de confianza en San Miguel de Allende." : "Apple, Windows, software installation, networks and business systems: one trusted technician in San Miguel de Allende."}>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { icon: Apple, title: isES ? "Soporte para equipos Apple" : "Apple device support", hash: "#apple" },
-            { icon: MemoryStick, title: isES ? "Computadoras y upgrades" : "Computers and upgrades", hash: "#upgrades" },
-            { icon: Wrench, title: isES ? "Diagnóstico y reparación" : "Diagnosis and repair", hash: isES ? "#reparacion" : "#repair" },
-            { icon: MonitorSmartphone, title: isES ? "Soporte remoto" : "Remote support", hash: isES ? "#remoto" : "#remote" },
-            { icon: Wifi, title: isES ? "Wi-Fi, redes y hogar" : "Wi-Fi, networks and home", hash: "#wifi" },
-            { icon: Building2, title: isES ? "Tecnología para negocios" : "Technology for businesses", hash: isES ? "#negocios" : "#business" },
+            { icon: Apple, title: isES ? "Soporte para equipos Apple" : "Apple device support", hash: "apple" },
+            { icon: MemoryStick, title: isES ? "Computadoras y upgrades" : "Computers and upgrades", hash: "upgrades" },
+            { icon: Download, title: isES ? "Instalación de programas" : "Software installation", hash: "software" },
+            { icon: Wrench, title: isES ? "Diagnóstico y reparación" : "Diagnosis and repair", hash: isES ? "reparacion" : "repair" },
+            { icon: MonitorSmartphone, title: isES ? "Soporte remoto" : "Remote support", hash: isES ? "remoto" : "remote" },
+            { icon: Wifi, title: isES ? "Wi-Fi, redes y hogar" : "Wi-Fi, networks and home", hash: "wifi" },
+            { icon: Building2, title: isES ? "Tecnología para negocios" : "Technology for businesses", hash: isES ? "negocios" : "business" },
           ].map(({ icon: Icon, title, hash }) => (
             <Link key={title} to={servicesPath} hash={hash} className="group rounded-xl border border-border bg-card p-6 hover:border-brand/60 hover:shadow-sm transition">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand-soft text-brand mb-4">
@@ -147,6 +152,34 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </Section>
 
+      <Section id="software" tone="soft" eyebrow={isES ? "PROGRAMAS Y SOFTWARE" : "PROGRAMS AND SOFTWARE"} title={isES ? "Instalación de programas en San Miguel de Allende" : "Software installation in San Miguel de Allende"} lede={isES ? "Instalamos, actualizamos y configuramos software legítimo para Windows y macOS, de forma remota o presencial." : "We install, update and configure legitimate software for Windows and macOS, remotely or on-site."}>
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
+          <ul className="grid sm:grid-cols-2 gap-3">
+            {[
+              isES ? "Microsoft 365 y Office con licencia válida" : "Microsoft 365 and Office with a valid license",
+              isES ? "Zoom, Teams, navegadores y herramientas de trabajo" : "Zoom, Teams, browsers and work tools",
+              isES ? "Antivirus, seguridad y actualizaciones" : "Antivirus, security and updates",
+              isES ? "Drivers, impresoras y periféricos" : "Drivers, printers and peripherals",
+              isES ? "Programas de diseño, edición y productividad" : "Design, editing and productivity software",
+              isES ? "Migración y configuración de programas en un equipo nuevo" : "Software migration and setup on a new computer",
+            ].map((item) => (
+              <li key={item} className="rounded-lg border border-border bg-card p-4 text-sm flex items-start gap-2">
+                <CheckCircle2 className="h-4 w-4 text-brand shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="rounded-xl border border-brand/30 bg-brand-soft/40 p-6">
+            <Download className="h-7 w-7 text-brand" />
+            <h3 className="mt-4 text-xl font-semibold tracking-tight">{isES ? "Software seguro y bien configurado" : "Safe, properly configured software"}</h3>
+            <p className="mt-3 text-sm text-muted-foreground">{isES ? "Trabajamos con licencias legítimas y respetamos los requisitos de cada programa. No instalamos software pirateado ni activadores ilegales." : "We work with legitimate licenses and respect each program's requirements. We do not install pirated software or illegal activators."}</p>
+            <Link to={softwarePath} className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand">
+              {isES ? "Ver servicio de instalación de programas" : "View software installation service"} <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </Section>
+
       <Section tone="soft" eyebrow={isES ? "PROCESO" : "PROCESS"} title={t.how.title}>
         <ol className="grid gap-5 md:grid-cols-4">
           {t.how.steps.map((s, i) => (
@@ -207,7 +240,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <Link to={diagPath} className="inline-flex items-center justify-center h-11 px-5 rounded-md bg-brand-soft text-graphite text-sm font-medium">
               {t.hero.ctaPrimary}
             </Link>
-            <a href={whatsappUrl(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-11 px-5 rounded-md border border-white/20 text-graphite-foreground text-sm font-medium">
+            <a href={whatsappPath(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-11 px-5 rounded-md border border-white/20 text-graphite-foreground text-sm font-medium">
               WhatsApp
             </a>
           </div>
