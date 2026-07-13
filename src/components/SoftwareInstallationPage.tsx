@@ -1,153 +1,187 @@
-import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   CheckCircle2,
+  Cloud,
   Download,
   Laptop,
   MessageCircle,
-  ShieldCheck,
-  Wrench,
+  MonitorSmartphone,
+  Settings2,
 } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import type { Locale } from "@/i18n/dict";
-import { whatsappPath } from "@/lib/site";
+import { diagnosisHref, whatsappPath } from "@/lib/site";
 
 export const SOFTWARE_FAQ = {
   es: [
     {
-      q: "¿Qué programas pueden instalar?",
-      a: "Podemos instalar y configurar programas legítimos para productividad, videollamadas, navegación, seguridad, diseño, edición, impresión y trabajo administrativo, siempre que sean compatibles con el equipo.",
+      q: "¿Qué programas pueden instalar y configurar?",
+      a: "Podemos ayudarte con Soft Restaurant 10, Microsoft Office y Microsoft 365, AutoCAD, SketchUp, Adobe Acrobat, navegadores, correo, videollamadas, impresoras, herramientas administrativas y otras aplicaciones compatibles con Windows o macOS.",
     },
     {
-      q: "¿Instalan Microsoft Office o Microsoft 365?",
-      a: "Sí. Se instala y configura con una licencia válida del cliente o una suscripción oficial. También podemos ayudar con inicio de sesión, actualizaciones y configuración básica.",
+      q: "¿El servicio es únicamente remoto?",
+      a: "Sí. La instalación de programas se realiza exclusivamente mediante conexión remota. El equipo debe encender, conectarse a internet y permitir el acceso temporal durante la sesión.",
     },
     {
-      q: "¿La instalación puede hacerse de forma remota?",
-      a: "Sí, cuando el equipo enciende, tiene conexión estable y el problema no requiere intervención física. La conexión remota se realiza con autorización del cliente y se cierra al terminar.",
+      q: "¿Pueden configurar Soft Restaurant 10?",
+      a: "Sí. Podemos apoyar con instalación, actualización, revisión de requisitos, conexión básica de impresoras y ajustes iniciales. Las configuraciones avanzadas de operación dependen de la infraestructura y necesidades del negocio.",
     },
     {
-      q: "¿Instalan programas en Mac y Windows?",
-      a: "Sí. Revisamos versión del sistema, espacio disponible, memoria, permisos y compatibilidad antes de instalar software en macOS o Windows.",
+      q: "¿Instalan Office o Microsoft 365?",
+      a: "Sí. Podemos instalar las aplicaciones, iniciar sesión, actualizar componentes, configurar Outlook y revisar errores de activación o compatibilidad.",
     },
     {
-      q: "¿Instalan programas pirateados o activadores?",
-      a: "No. Trabajamos únicamente con software legítimo, licencias válidas, versiones gratuitas oficiales o programas de código abierto.",
+      q: "¿Pueden instalar AutoCAD u otros programas de diseño?",
+      a: "Sí. Primero revisamos versión de Windows o macOS, espacio disponible, memoria RAM, tarjeta gráfica y requisitos del programa para evitar instalaciones incompatibles.",
     },
     {
       q: "¿Pueden configurar programas en una computadora nueva?",
-      a: "Sí. Podemos instalar las aplicaciones necesarias, configurar correo, impresoras, navegadores, respaldos y migrar archivos desde el equipo anterior.",
+      a: "Sí. Podemos preparar un equipo nuevo con las aplicaciones de trabajo, correo, navegadores, herramientas PDF, videollamadas, impresoras y ajustes básicos.",
     },
   ],
   en: [
     {
-      q: "What software can you install?",
-      a: "We install and configure legitimate productivity, video meeting, browser, security, design, editing, printing and business software, provided it is compatible with the device.",
+      q: "What programs can you install and configure?",
+      a: "We can help with Soft Restaurant 10, Microsoft Office and Microsoft 365, AutoCAD, SketchUp, Adobe Acrobat, browsers, email, video meetings, printers, administrative tools and other Windows or macOS applications.",
     },
     {
-      q: "Do you install Microsoft Office or Microsoft 365?",
-      a: "Yes. We install and configure it using the client's valid license or official subscription, and can help with sign-in, updates and basic setup.",
+      q: "Is this service remote only?",
+      a: "Yes. Software installation is provided exclusively through a remote connection. The computer must power on, connect to the internet and allow temporary access during the session.",
     },
     {
-      q: "Can software be installed remotely?",
-      a: "Yes, when the computer turns on, has a stable connection and does not need physical work. Remote access requires your permission and is closed when the session ends.",
+      q: "Can you configure Soft Restaurant 10?",
+      a: "Yes. We can assist with installation, updates, requirement checks, basic printer connection and initial settings. Advanced operating configuration depends on the business infrastructure and needs.",
     },
     {
-      q: "Do you install software on Mac and Windows?",
-      a: "Yes. We check system version, available storage, memory, permissions and compatibility before installing software on macOS or Windows.",
+      q: "Do you install Office or Microsoft 365?",
+      a: "Yes. We can install the applications, sign in, update components, configure Outlook and troubleshoot activation or compatibility issues.",
     },
     {
-      q: "Do you install pirated software or activators?",
-      a: "No. We only work with legitimate software, valid licenses, official free versions or open-source programs.",
+      q: "Can you install AutoCAD or other design programs?",
+      a: "Yes. We first review the Windows or macOS version, available storage, RAM, graphics hardware and program requirements to avoid incompatible installations.",
     },
     {
-      q: "Can you configure software on a new computer?",
-      a: "Yes. We can install the applications you need, configure email, printers, browsers and backups, and migrate files from the previous computer.",
+      q: "Can you configure programs on a new computer?",
+      a: "Yes. We can prepare a new computer with work applications, email, browsers, PDF tools, video meeting software, printers and essential settings.",
     },
   ],
 } as const;
 
 export function SoftwareInstallationPage({ locale }: { locale: Locale }) {
   const isES = locale === "es";
-  const diagnosisPath = isES ? "/solicitar-diagnostico" : "/en/request-diagnosis";
+  const diagnosis = diagnosisHref(locale, "software-page", "software-installation");
   const servicesPath = isES ? "/servicios" : "/en/services";
   const message = isES
-    ? "Hola San Miguel Tech, necesito instalar o configurar programas en mi computadora."
-    : "Hi San Miguel Tech, I need software installed or configured on my computer.";
+    ? "Hola San Miguel Tech, necesito instalar o configurar un programa de forma remota."
+    : "Hi San Miguel Tech, I need a program installed or configured remotely.";
   const faq = SOFTWARE_FAQ[locale];
 
   const softwareGroups = isES
     ? [
         {
-          title: "Trabajo y productividad",
-          items: ["Microsoft 365 y Office", "Zoom y Microsoft Teams", "Correo electrónico", "Navegadores", "Lectores y herramientas PDF"],
+          title: "Restaurantes y administración",
+          description: "Programas de operación y gestión para negocios.",
+          items: ["Soft Restaurant 10", "Herramientas administrativas", "Sistemas de facturación", "Impresoras de tickets", "Aplicaciones de inventario"],
         },
         {
-          title: "Diseño, edición y administración",
-          items: ["Programas de diseño y fotografía", "Edición de audio y video", "Herramientas contables y administrativas", "Aplicaciones para negocios"],
+          title: "Oficina y productividad",
+          description: "Aplicaciones para trabajo, documentos y comunicación.",
+          items: ["Microsoft Office", "Microsoft 365", "Outlook", "Teams y Zoom", "Adobe Acrobat y PDF"],
         },
         {
-          title: "Sistema y periféricos",
-          items: ["Drivers y controladores", "Impresoras y escáneres", "Antivirus y seguridad", "Actualizaciones", "Utilidades y respaldos"],
+          title: "Diseño y arquitectura",
+          description: "Instalación y revisión de compatibilidad para software especializado.",
+          items: ["AutoCAD", "SketchUp", "Adobe Creative Cloud", "CorelDRAW", "Herramientas de render y edición"],
+        },
+        {
+          title: "Sistema y conectividad",
+          description: "Programas esenciales para que el equipo trabaje correctamente.",
+          items: ["Drivers y controladores", "Impresoras y escáneres", "Navegadores", "Correo electrónico", "Utilidades y respaldos"],
         },
       ]
     : [
         {
-          title: "Work and productivity",
-          items: ["Microsoft 365 and Office", "Zoom and Microsoft Teams", "Email", "Web browsers", "PDF readers and tools"],
+          title: "Restaurants and management",
+          description: "Business operation and management applications.",
+          items: ["Soft Restaurant 10", "Administrative tools", "Invoicing systems", "Receipt printers", "Inventory applications"],
         },
         {
-          title: "Design, editing and management",
-          items: ["Design and photography software", "Audio and video editing", "Accounting and management tools", "Business applications"],
+          title: "Office and productivity",
+          description: "Applications for documents, work and communication.",
+          items: ["Microsoft Office", "Microsoft 365", "Outlook", "Teams and Zoom", "Adobe Acrobat and PDF"],
         },
         {
-          title: "System and peripherals",
-          items: ["Drivers", "Printers and scanners", "Antivirus and security", "Updates", "Utilities and backups"],
+          title: "Design and architecture",
+          description: "Installation and compatibility review for specialized software.",
+          items: ["AutoCAD", "SketchUp", "Adobe Creative Cloud", "CorelDRAW", "Rendering and editing tools"],
         },
+        {
+          title: "System and connectivity",
+          description: "Essential applications and components for a reliable setup.",
+          items: ["Drivers", "Printers and scanners", "Browsers", "Email", "Utilities and backups"],
+        },
+      ];
+
+  const process = isES
+    ? [
+        ["1", "Cuéntanos qué programa necesitas", "Envía el nombre, versión y uso que tendrá."],
+        ["2", "Revisamos compatibilidad", "Validamos sistema, espacio, memoria y requisitos."],
+        ["3", "Conectamos de forma remota", "Tú autorizas el acceso temporal desde tu equipo."],
+        ["4", "Instalamos y comprobamos", "Abrimos el programa, revisamos errores y dejamos la configuración lista."],
+      ]
+    : [
+        ["1", "Tell us what program you need", "Send the program name, version and intended use."],
+        ["2", "We check compatibility", "We review the system, storage, memory and requirements."],
+        ["3", "We connect remotely", "You authorize temporary access from your computer."],
+        ["4", "We install and verify", "We open the program, check errors and leave the setup ready."],
       ];
 
   return (
     <>
-      <section className="border-b border-border">
-        <div className="container-page pt-14 md:pt-20 pb-14 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-center">
+      <section className="overflow-hidden border-b border-black/[0.06] bg-white">
+        <div className="container-page grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
           <div>
-            <div className="text-xs font-medium tracking-[0.2em] uppercase text-brand mb-3">
-              {isES ? "SOFTWARE PARA WINDOWS Y MAC" : "SOFTWARE FOR WINDOWS AND MAC"}
+            <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+              {isES ? "SERVICIO REMOTO PARA WINDOWS Y MAC" : "REMOTE SERVICE FOR WINDOWS AND MAC"}
             </div>
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05] max-w-3xl">
-              {isES
-                ? "Instalación de programas en San Miguel de Allende"
-                : "Software installation in San Miguel de Allende"}
+            <h1 className="max-w-3xl text-[42px] font-semibold leading-[0.98] sm:text-6xl lg:text-7xl">
+              {isES ? "Instalación de programas, sin trasladar tu equipo." : "Software installation, without moving your computer."}
             </h1>
-            <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
               {isES
-                ? "Instalación, actualización y configuración de programas para computadoras Windows y Mac. Servicio remoto, presencial y a domicilio en San Miguel de Allende."
-                : "Installation, updates and configuration of programs for Windows computers and Macs. Remote, in-shop and on-site service in San Miguel de Allende."}
+                ? "Instalamos, actualizamos y configuramos programas como Soft Restaurant 10, Office, AutoCAD y otras herramientas mediante soporte remoto en San Miguel de Allende."
+                : "We install, update and configure programs such as Soft Restaurant 10, Office, AutoCAD and other tools through remote support in San Miguel de Allende."}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to={diagnosisPath} className="inline-flex items-center justify-center h-12 px-6 rounded-md bg-brand text-brand-foreground text-sm font-medium">
-                {isES ? "Solicitar instalación" : "Request installation"}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href={diagnosis} className="inline-flex h-12 items-center justify-center rounded-full bg-brand px-6 text-sm font-medium text-white shadow-sm">
+                {isES ? "Solicitar instalación remota" : "Request remote installation"}
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-              <a href={whatsappPath(message)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-12 px-6 rounded-md border border-border text-sm font-medium hover:bg-accent/50 transition">
+              </a>
+              <a href={whatsappPath(message)} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center rounded-full border border-black/[0.09] bg-white px-6 text-sm font-medium">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp
               </a>
             </div>
           </div>
-          <div className="rounded-2xl border border-brand/30 bg-brand-soft/40 p-7">
-            <Download className="h-9 w-9 text-brand" />
-            <h2 className="mt-5 text-2xl font-semibold tracking-tight">
-              {isES ? "Instalación segura y compatible" : "Safe, compatible installation"}
+
+          <div className="apple-card relative overflow-hidden bg-[#f5f5f7] p-7 sm:p-10">
+            <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-brand/10 blur-3xl" />
+            <MonitorSmartphone className="relative h-11 w-11 text-brand" />
+            <h2 className="relative mt-6 text-3xl font-semibold">
+              {isES ? "Exclusivamente remoto" : "Remote only"}
             </h2>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+            <p className="relative mt-4 text-base leading-relaxed text-muted-foreground">
               {isES
-                ? "Antes de instalar revisamos el sistema operativo, espacio disponible, memoria, permisos, licencia y requisitos del programa para evitar errores o compras innecesarias."
-                : "Before installing, we check the operating system, available storage, memory, permissions, license and program requirements to avoid errors or unnecessary purchases."}
+                ? "No necesitas llevar la computadora. Durante la sesión puedes ver todo lo que hacemos y finalizar el acceso cuando quieras."
+                : "You do not need to bring the computer in. During the session you can see everything we do and end access whenever you choose."}
             </p>
-            <div className="mt-5 flex items-start gap-2 text-sm">
-              <ShieldCheck className="h-5 w-5 text-brand shrink-0" />
-              <span>{isES ? "Solo software legítimo y fuentes oficiales." : "Legitimate software and official sources only."}</span>
+            <div className="relative mt-6 grid gap-3 text-sm">
+              {[isES ? "Equipo encendido" : "Computer powered on", isES ? "Internet estable" : "Stable internet", isES ? "Acceso autorizado por ti" : "Access authorized by you"].map((item) => (
+                <div key={item} className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3">
+                  <CheckCircle2 className="h-4 w-4 text-brand" />
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -155,87 +189,75 @@ export function SoftwareInstallationPage({ locale }: { locale: Locale }) {
 
       <Section
         eyebrow={isES ? "PROGRAMAS" : "PROGRAMS"}
-        title={isES ? "¿Qué podemos instalar y configurar?" : "What can we install and configure?"}
-        lede={isES ? "La disponibilidad depende de la compatibilidad del equipo y de contar con una licencia válida cuando el programa la requiere." : "Availability depends on device compatibility and a valid license when the program requires one."}
+        title={isES ? "Aplicaciones que podemos instalar y configurar" : "Applications we can install and configure"}
+        lede={isES ? "Estas son algunas de las solicitudes más comunes. También podemos revisar otros programas según tu equipo y necesidades." : "These are some of the most common requests. We can also review other programs based on your computer and needs."}
       >
-        <div className="grid gap-4 md:grid-cols-3">
-          {softwareGroups.map((group) => (
-            <div key={group.title} className="rounded-xl border border-border bg-card p-6">
-              <Laptop className="h-6 w-6 text-brand" />
-              <h2 className="mt-4 text-lg font-semibold tracking-tight">{group.title}</h2>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                {group.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-brand shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="grid gap-4 md:grid-cols-2">
+          {softwareGroups.map((group, index) => {
+            const Icon = [Settings2, Cloud, Download, Laptop][index] ?? Download;
+            return (
+              <article key={group.title} className="apple-card p-6 sm:p-8">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h2 className="mt-5 text-2xl font-semibold">{group.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{group.description}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <span key={item} className="rounded-full bg-[#f5f5f7] px-3 py-2 text-sm text-foreground">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </Section>
 
-      <Section
-        tone="soft"
-        eyebrow={isES ? "MODALIDADES" : "SERVICE OPTIONS"}
-        title={isES ? "Instalación remota o presencial" : "Remote or on-site installation"}
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            {
-              icon: Laptop,
-              title: isES ? "Soporte remoto" : "Remote support",
-              text: isES ? "Ideal para instalar, actualizar o configurar programas sin trasladar el equipo." : "Ideal for installing, updating or configuring software without moving the computer.",
-            },
-            {
-              icon: Wrench,
-              title: isES ? "Revisión presencial" : "In-shop service",
-              text: isES ? "Para equipos lentos, con errores, poco espacio o problemas que requieren diagnóstico previo." : "For slow computers, errors, low storage or problems that need diagnosis first.",
-            },
-            {
-              icon: ShieldCheck,
-              title: isES ? "Configuración completa" : "Complete setup",
-              text: isES ? "Programas, correo, impresora, navegador, respaldos y ajustes básicos en un equipo nuevo." : "Programs, email, printer, browser, backups and basic settings on a new computer.",
-            },
-          ].map(({ icon: Icon, title, text }) => (
-            <div key={title} className="rounded-xl border border-border bg-card p-6">
-              <Icon className="h-6 w-6 text-brand" />
-              <h2 className="mt-4 text-lg font-semibold tracking-tight">{title}</h2>
-              <p className="mt-2 text-sm text-muted-foreground">{text}</p>
-            </div>
+      <Section tone="soft" eyebrow={isES ? "PROCESO" : "PROCESS"} title={isES ? "Cómo funciona la instalación remota" : "How remote installation works"}>
+        <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {process.map(([number, title, text]) => (
+            <li key={number} className="apple-card p-6">
+              <div className="text-sm font-semibold text-brand">0{number}</div>
+              <h2 className="mt-3 text-lg font-semibold">{title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </Section>
 
       <Section eyebrow="FAQ" title={isES ? "Preguntas sobre instalación de programas" : "Software installation questions"}>
         <div className="grid gap-3 md:grid-cols-2">
           {faq.map((item) => (
-            <details key={item.q} className="rounded-xl border border-border bg-card p-5">
-              <summary className="cursor-pointer font-medium text-foreground">{item.q}</summary>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{item.a}</p>
+            <details key={item.q} className="apple-card group p-5 sm:p-6">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-medium text-foreground">
+                {item.q}
+                <span className="text-xl leading-none text-brand transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
             </details>
           ))}
         </div>
       </Section>
 
       <Section tone="graphite">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex flex-col items-start justify-between gap-7 md:flex-row md:items-center">
           <div>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-              {isES ? "¿Qué programa necesitas instalar?" : "What software do you need installed?"}
+            <h2 className="text-3xl font-semibold md:text-4xl">
+              {isES ? "Dinos qué programa necesitas." : "Tell us what program you need."}
             </h2>
-            <p className="mt-2 text-graphite-foreground/70 max-w-xl">
-              {isES ? "Envíanos el nombre del programa y el modelo de tu computadora para revisar compatibilidad." : "Send us the program name and computer model so we can check compatibility."}
+            <p className="mt-3 max-w-xl text-graphite-foreground/70">
+              {isES ? "Envíanos el nombre del programa y los datos de tu computadora para revisar el servicio remoto." : "Send us the program name and your computer details so we can review the remote service."}
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Link to={diagnosisPath} className="inline-flex items-center justify-center h-11 px-5 rounded-md bg-brand-soft text-graphite text-sm font-medium">
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <a href={diagnosis} className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-medium text-graphite">
               {isES ? "Solicitar diagnóstico" : "Request a diagnosis"}
-            </Link>
-            <Link to={servicesPath} className="inline-flex items-center justify-center h-11 px-5 rounded-md border border-white/20 text-graphite-foreground text-sm font-medium">
+            </a>
+            <a href={servicesPath} className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-sm font-medium text-white">
               {isES ? "Ver todos los servicios" : "View all services"}
-            </Link>
+            </a>
           </div>
         </div>
       </Section>
