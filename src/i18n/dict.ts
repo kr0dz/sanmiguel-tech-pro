@@ -7,6 +7,7 @@ export const DICT = {
       services: "Servicios",
       apple: "Apple",
       upgrades: "Upgrades",
+      software: "Programas",
       business: "Negocios",
       remote: "Soporte remoto",
       about: "Nosotros",
@@ -19,7 +20,7 @@ export const DICT = {
       eyebrow: "SOLUCIONES TECNOLÓGICAS LOCALES",
       h1: "Técnico en San Miguel de Allende",
       lede:
-        "Reparación, upgrades y soporte tecnológico para equipos Apple, computadoras Windows, hogares y negocios. Atención remota, en taller y a domicilio.",
+        "Reparación, upgrades, instalación de programas y soporte tecnológico para equipos Apple, computadoras Windows, hogares y negocios. Atención remota, en taller y a domicilio.",
       ctaPrimary: "Solicitar diagnóstico",
       ctaWhatsapp: "Escribir por WhatsApp",
       trust: [
@@ -40,6 +41,7 @@ export const DICT = {
         "Perdí archivos importantes",
         "Mi Wi-Fi no llega a toda la casa",
         "Mi impresora no funciona",
+        "Necesito instalar o configurar programas",
         "Necesito configurar un equipo nuevo",
         "Tengo virus o ventanas sospechosas",
         "Necesito soporte tecnológico para mi negocio",
@@ -49,7 +51,7 @@ export const DICT = {
       title: "Tres formas de atenderte",
       remote: {
         title: "Soporte remoto",
-        text: "Para software, configuración, cuentas y errores que no requieren abrir el equipo.",
+        text: "Para software, instalación de programas, configuración, cuentas y errores que no requieren abrir el equipo.",
       },
       onsite: {
         title: "Visita a domicilio",
@@ -116,6 +118,7 @@ export const DICT = {
         { q: "¿Son un centro autorizado por Apple?", a: "No. San Miguel Tech es un servicio técnico independiente y no está afiliado a Apple." },
         { q: "¿Pueden mejorar una computadora lenta?", a: "En muchos casos sí, mediante limpieza, optimización de sistema, upgrade a SSD o ampliación de memoria RAM. Se confirma la compatibilidad antes de comenzar." },
         { q: "¿Instalan SSD y memoria RAM?", a: "Sí, después de verificar que la pieza es compatible con tu equipo." },
+        { q: "¿Instalan programas en Windows y Mac?", a: "Sí. Instalamos y configuramos software legítimo, versiones gratuitas oficiales o programas de código abierto. Para software de pago, el cliente debe contar con una licencia válida." },
         { q: "¿Ofrecen soporte remoto?", a: "Sí, mediante una conexión remota segura y con tu consentimiento en todo momento." },
         { q: "¿Realizan visitas a domicilio?", a: "Sí, dentro de San Miguel de Allende. Se agenda una ventana de tiempo previamente." },
         { q: "¿Trabajan con negocios y rentas vacacionales?", a: "Sí. Contamos con esquemas de soporte recurrente para oficinas, hoteles y rentas vacacionales." },
@@ -141,6 +144,7 @@ export const DICT = {
       services: "Services",
       apple: "Apple",
       upgrades: "Upgrades",
+      software: "Software",
       business: "Business",
       remote: "Remote support",
       about: "About",
@@ -153,7 +157,7 @@ export const DICT = {
       eyebrow: "LOCAL TECHNOLOGY SOLUTIONS",
       h1: "Computer technician in San Miguel de Allende",
       lede:
-        "Repairs, upgrades and tech support for Apple devices, Windows computers, homes and businesses. Remote, in-shop and on-site.",
+        "Repairs, upgrades, software installation and tech support for Apple devices, Windows computers, homes and businesses. Remote, in-shop and on-site.",
       ctaPrimary: "Request a diagnosis",
       ctaWhatsapp: "Message on WhatsApp",
       trust: [
@@ -174,6 +178,7 @@ export const DICT = {
         "I lost important files",
         "My Wi-Fi doesn't reach the whole house",
         "My printer doesn't work",
+        "I need software installed or configured",
         "I need to set up a new device",
         "I have viruses or suspicious pop-ups",
         "I need tech support for my business",
@@ -183,7 +188,7 @@ export const DICT = {
       title: "Three ways we help",
       remote: {
         title: "Remote support",
-        text: "For software, configuration, accounts and errors that don't require opening the device.",
+        text: "For software installation, configuration, accounts and errors that don't require opening the device.",
       },
       onsite: {
         title: "On-site visit",
@@ -238,6 +243,7 @@ export const DICT = {
         { q: "Are you an Apple Authorized Service Provider?", a: "No. San Miguel Tech is an independent tech service and is not affiliated with Apple." },
         { q: "Can you make a slow computer faster?", a: "Often yes — with cleaning, system optimization, SSD upgrade or RAM expansion. Compatibility is confirmed before starting." },
         { q: "Do you install SSDs and RAM?", a: "Yes, after verifying the part is compatible with your device." },
+        { q: "Do you install software on Windows and Mac?", a: "Yes. We install and configure legitimate software, official free versions or open-source programs. Paid software requires a valid customer license." },
         { q: "Do you offer remote support?", a: "Yes, through a secure remote connection and always with your consent." },
         { q: "Do you make house calls?", a: "Yes, within San Miguel de Allende. A time window is scheduled in advance." },
         { q: "Do you work with businesses and vacation rentals?", a: "Yes. We offer recurring support plans for offices, hotels and vacation rentals." },
@@ -267,13 +273,11 @@ export function localeFromPath(pathname: string): Locale {
   return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "es";
 }
 
-export function pathFor(locale: Locale, key: string): string {
-  // key is a canonical path without locale prefix, e.g. "/servicios"
-  if (locale === "es") return key;
-  // English path map
-  const map: Record<string, string> = {
+export function alternatePath(locale: Locale, pathname: string): string {
+  const pairs: Record<string, string> = {
     "/": "/en",
     "/servicios": "/en/services",
+    "/instalacion-de-programas-san-miguel-de-allende": "/en/software-installation-san-miguel-de-allende",
     "/solicitar-diagnostico": "/en/request-diagnosis",
     "/nosotros": "/en/about",
     "/contacto": "/en/contact",
@@ -281,32 +285,8 @@ export function pathFor(locale: Locale, key: string): string {
     "/aviso-de-privacidad": "/en/privacy",
     "/terminos-del-servicio": "/en/terms",
   };
-  return map[key] ?? "/en";
-}
 
-export function alternatePath(currentLocale: Locale, pathname: string): string {
-  if (currentLocale === "es") {
-    const map: Record<string, string> = {
-      "/": "/en",
-      "/servicios": "/en/services",
-      "/solicitar-diagnostico": "/en/request-diagnosis",
-      "/nosotros": "/en/about",
-      "/contacto": "/en/contact",
-      "/preguntas-frecuentes": "/en/faq",
-      "/aviso-de-privacidad": "/en/privacy",
-      "/terminos-del-servicio": "/en/terms",
-    };
-    return map[pathname] ?? "/en";
-  }
-  const map: Record<string, string> = {
-    "/en": "/",
-    "/en/services": "/servicios",
-    "/en/request-diagnosis": "/solicitar-diagnostico",
-    "/en/about": "/nosotros",
-    "/en/contact": "/contacto",
-    "/en/faq": "/preguntas-frecuentes",
-    "/en/privacy": "/aviso-de-privacidad",
-    "/en/terms": "/terminos-del-servicio",
-  };
-  return map[pathname] ?? "/";
+  if (locale === "es") return pairs[pathname] ?? "/en";
+  const reverse = Object.fromEntries(Object.entries(pairs).map(([es, en]) => [en, es]));
+  return reverse[pathname] ?? "/";
 }
