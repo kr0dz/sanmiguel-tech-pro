@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TerminosDelServicioRouteImport } from './routes/terminos-del-servicio'
 import { Route as SolicitarDiagnosticoRouteImport } from './routes/solicitar-diagnostico'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
 import { Route as NosotrosRouteImport } from './routes/nosotros'
@@ -18,6 +19,7 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AvisoDePrivacidadRouteImport } from './routes/aviso-de-privacidad'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as EnTermsRouteImport } from './routes/en/terms'
 import { Route as EnServicesRouteImport } from './routes/en/services'
 import { Route as EnRequestDiagnosisRouteImport } from './routes/en/request-diagnosis'
@@ -25,6 +27,7 @@ import { Route as EnPrivacyRouteImport } from './routes/en/privacy'
 import { Route as EnFaqRouteImport } from './routes/en/faq'
 import { Route as EnContactRouteImport } from './routes/en/contact'
 import { Route as EnAboutRouteImport } from './routes/en/about'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const TerminosDelServicioRoute = TerminosDelServicioRouteImport.update({
   id: '/terminos-del-servicio',
@@ -34,6 +37,11 @@ const TerminosDelServicioRoute = TerminosDelServicioRouteImport.update({
 const SolicitarDiagnosticoRoute = SolicitarDiagnosticoRouteImport.update({
   id: '/solicitar-diagnostico',
   path: '/solicitar-diagnostico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServiciosRoute = ServiciosRouteImport.update({
@@ -71,6 +79,11 @@ const EnIndexRoute = EnIndexRouteImport.update({
   path: '/en/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnTermsRoute = EnTermsRouteImport.update({
   id: '/en/terms',
   path: '/en/terms',
@@ -106,6 +119,11 @@ const EnAboutRoute = EnAboutRouteImport.update({
   path: '/en/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -114,8 +132,10 @@ export interface FileRoutesByFullPath {
   '/nosotros': typeof NosotrosRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
   '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/admin/login': typeof AdminLoginRoute
   '/en/about': typeof EnAboutRoute
   '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRoute
@@ -123,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
   '/en/services': typeof EnServicesRoute
   '/en/terms': typeof EnTermsRoute
+  '/admin/': typeof AdminIndexRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
@@ -132,8 +153,10 @@ export interface FileRoutesByTo {
   '/nosotros': typeof NosotrosRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
   '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/admin/login': typeof AdminLoginRoute
   '/en/about': typeof EnAboutRoute
   '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRoute
@@ -141,6 +164,7 @@ export interface FileRoutesByTo {
   '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
   '/en/services': typeof EnServicesRoute
   '/en/terms': typeof EnTermsRoute
+  '/admin': typeof AdminIndexRoute
   '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
@@ -151,8 +175,10 @@ export interface FileRoutesById {
   '/nosotros': typeof NosotrosRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/servicios': typeof ServiciosRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
   '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/admin/login': typeof AdminLoginRoute
   '/en/about': typeof EnAboutRoute
   '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRoute
@@ -160,6 +186,7 @@ export interface FileRoutesById {
   '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
   '/en/services': typeof EnServicesRoute
   '/en/terms': typeof EnTermsRoute
+  '/admin/': typeof AdminIndexRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
@@ -171,8 +198,10 @@ export interface FileRouteTypes {
     | '/nosotros'
     | '/preguntas-frecuentes'
     | '/servicios'
+    | '/sitemap.xml'
     | '/solicitar-diagnostico'
     | '/terminos-del-servicio'
+    | '/admin/login'
     | '/en/about'
     | '/en/contact'
     | '/en/faq'
@@ -180,6 +209,7 @@ export interface FileRouteTypes {
     | '/en/request-diagnosis'
     | '/en/services'
     | '/en/terms'
+    | '/admin/'
     | '/en/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -189,8 +219,10 @@ export interface FileRouteTypes {
     | '/nosotros'
     | '/preguntas-frecuentes'
     | '/servicios'
+    | '/sitemap.xml'
     | '/solicitar-diagnostico'
     | '/terminos-del-servicio'
+    | '/admin/login'
     | '/en/about'
     | '/en/contact'
     | '/en/faq'
@@ -198,6 +230,7 @@ export interface FileRouteTypes {
     | '/en/request-diagnosis'
     | '/en/services'
     | '/en/terms'
+    | '/admin'
     | '/en'
   id:
     | '__root__'
@@ -207,8 +240,10 @@ export interface FileRouteTypes {
     | '/nosotros'
     | '/preguntas-frecuentes'
     | '/servicios'
+    | '/sitemap.xml'
     | '/solicitar-diagnostico'
     | '/terminos-del-servicio'
+    | '/admin/login'
     | '/en/about'
     | '/en/contact'
     | '/en/faq'
@@ -216,6 +251,7 @@ export interface FileRouteTypes {
     | '/en/request-diagnosis'
     | '/en/services'
     | '/en/terms'
+    | '/admin/'
     | '/en/'
   fileRoutesById: FileRoutesById
 }
@@ -226,8 +262,10 @@ export interface RootRouteChildren {
   NosotrosRoute: typeof NosotrosRoute
   PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
   ServiciosRoute: typeof ServiciosRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolicitarDiagnosticoRoute: typeof SolicitarDiagnosticoRoute
   TerminosDelServicioRoute: typeof TerminosDelServicioRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   EnAboutRoute: typeof EnAboutRoute
   EnContactRoute: typeof EnContactRoute
   EnFaqRoute: typeof EnFaqRoute
@@ -235,6 +273,7 @@ export interface RootRouteChildren {
   EnRequestDiagnosisRoute: typeof EnRequestDiagnosisRoute
   EnServicesRoute: typeof EnServicesRoute
   EnTermsRoute: typeof EnTermsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   EnIndexRoute: typeof EnIndexRoute
 }
 
@@ -252,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/solicitar-diagnostico'
       fullPath: '/solicitar-diagnostico'
       preLoaderRoute: typeof SolicitarDiagnosticoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicios': {
@@ -303,6 +349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en/terms': {
       id: '/en/terms'
       path: '/en/terms'
@@ -352,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -362,8 +422,10 @@ const rootRouteChildren: RootRouteChildren = {
   NosotrosRoute: NosotrosRoute,
   PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
   ServiciosRoute: ServiciosRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolicitarDiagnosticoRoute: SolicitarDiagnosticoRoute,
   TerminosDelServicioRoute: TerminosDelServicioRoute,
+  AdminLoginRoute: AdminLoginRoute,
   EnAboutRoute: EnAboutRoute,
   EnContactRoute: EnContactRoute,
   EnFaqRoute: EnFaqRoute,
@@ -371,6 +433,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnRequestDiagnosisRoute: EnRequestDiagnosisRoute,
   EnServicesRoute: EnServicesRoute,
   EnTermsRoute: EnTermsRoute,
+  AdminIndexRoute: AdminIndexRoute,
   EnIndexRoute: EnIndexRoute,
 }
 export const routeTree = rootRouteImport
