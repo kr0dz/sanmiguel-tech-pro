@@ -1,21 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ServicesPage } from "@/components/ServicesPage";
+import { absoluteUrl } from "@/lib/site";
 
-export const Route = createFileRoute("/en/services")({
+const path = "/en/services";
+const title = "Computer Repair and Tech Services in San Miguel de Allende";
+const description = "Apple and Windows support, computer repair, upgrades, software installation, Wi-Fi and remote or on-site service in San Miguel de Allende.";
+
+export const Route = createFileRoute(path)({
   component: () => <SiteShell><ServicesPage locale="en" /></SiteShell>,
   head: () => ({
     meta: [
-      { title: "Tech Services | San Miguel Tech" },
-      { name: "description", content: "Apple, Windows, upgrades, remote support, Wi-Fi and business technology in San Miguel de Allende." },
-      { property: "og:title", content: "Tech Services | San Miguel Tech" },
-      { property: "og:description", content: "Full-service technical support in San Miguel de Allende." },
-      { property: "og:url", content: "/en/services" },
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:url", content: absoluteUrl(path) },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
     links: [
-      { rel: "canonical", href: "/en/services" },
-      { rel: "alternate", hrefLang: "es", href: "/servicios" },
-      { rel: "alternate", hrefLang: "en", href: "/en/services" },
+      { rel: "canonical", href: absoluteUrl(path) },
+      { rel: "alternate", hrefLang: "es-MX", href: absoluteUrl("/servicios") },
+      { rel: "alternate", hrefLang: "en", href: absoluteUrl(path) },
+      { rel: "alternate", hrefLang: "x-default", href: absoluteUrl("/servicios") },
     ],
   }),
 });
