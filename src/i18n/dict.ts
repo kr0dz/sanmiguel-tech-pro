@@ -20,7 +20,7 @@ export const DICT = {
       eyebrow: "SOLUCIONES TECNOLÓGICAS LOCALES",
       h1: "Técnico en San Miguel de Allende",
       lede:
-        "Reparación, upgrades, instalación de programas y soporte tecnológico para equipos Apple, computadoras Windows, hogares y negocios. Atención remota, en taller y a domicilio.",
+        "Reparación, upgrades, instalación remota de programas y soporte tecnológico para equipos Apple, computadoras Windows, hogares y negocios.",
       ctaPrimary: "Solicitar diagnóstico",
       ctaWhatsapp: "Escribir por WhatsApp",
       trust: [
@@ -51,7 +51,7 @@ export const DICT = {
       title: "Tres formas de atenderte",
       remote: {
         title: "Soporte remoto",
-        text: "Para software, instalación de programas, configuración, cuentas y errores que no requieren abrir el equipo.",
+        text: "Para instalación de programas, configuración, cuentas y errores que no requieren abrir el equipo.",
       },
       onsite: {
         title: "Visita a domicilio",
@@ -118,7 +118,7 @@ export const DICT = {
         { q: "¿Son un centro autorizado por Apple?", a: "No. San Miguel Tech es un servicio técnico independiente y no está afiliado a Apple." },
         { q: "¿Pueden mejorar una computadora lenta?", a: "En muchos casos sí, mediante limpieza, optimización de sistema, upgrade a SSD o ampliación de memoria RAM. Se confirma la compatibilidad antes de comenzar." },
         { q: "¿Instalan SSD y memoria RAM?", a: "Sí, después de verificar que la pieza es compatible con tu equipo." },
-        { q: "¿Instalan programas en Windows y Mac?", a: "Sí. Instalamos y configuramos software legítimo, versiones gratuitas oficiales o programas de código abierto. Para software de pago, el cliente debe contar con una licencia válida." },
+        { q: "¿Instalan programas en Windows y Mac?", a: "Sí. La instalación se realiza de forma remota e incluye programas como Soft Restaurant 10, Microsoft Office, AutoCAD, SketchUp, herramientas Adobe, correo, navegadores y aplicaciones de trabajo compatibles con el equipo." },
         { q: "¿Ofrecen soporte remoto?", a: "Sí, mediante una conexión remota segura y con tu consentimiento en todo momento." },
         { q: "¿Realizan visitas a domicilio?", a: "Sí, dentro de San Miguel de Allende. Se agenda una ventana de tiempo previamente." },
         { q: "¿Trabajan con negocios y rentas vacacionales?", a: "Sí. Contamos con esquemas de soporte recurrente para oficinas, hoteles y rentas vacacionales." },
@@ -157,7 +157,7 @@ export const DICT = {
       eyebrow: "LOCAL TECHNOLOGY SOLUTIONS",
       h1: "Computer technician in San Miguel de Allende",
       lede:
-        "Repairs, upgrades, software installation and tech support for Apple devices, Windows computers, homes and businesses. Remote, in-shop and on-site.",
+        "Repairs, upgrades, remote software installation and tech support for Apple devices, Windows computers, homes and businesses.",
       ctaPrimary: "Request a diagnosis",
       ctaWhatsapp: "Message on WhatsApp",
       trust: [
@@ -243,7 +243,7 @@ export const DICT = {
         { q: "Are you an Apple Authorized Service Provider?", a: "No. San Miguel Tech is an independent tech service and is not affiliated with Apple." },
         { q: "Can you make a slow computer faster?", a: "Often yes — with cleaning, system optimization, SSD upgrade or RAM expansion. Compatibility is confirmed before starting." },
         { q: "Do you install SSDs and RAM?", a: "Yes, after verifying the part is compatible with your device." },
-        { q: "Do you install software on Windows and Mac?", a: "Yes. We install and configure legitimate software, official free versions or open-source programs. Paid software requires a valid customer license." },
+        { q: "Do you install software on Windows and Mac?", a: "Yes. Installation is provided remotely and includes programs such as Soft Restaurant 10, Microsoft Office, AutoCAD, SketchUp, Adobe tools, email, browsers and work applications compatible with the computer." },
         { q: "Do you offer remote support?", a: "Yes, through a secure remote connection and always with your consent." },
         { q: "Do you make house calls?", a: "Yes, within San Miguel de Allende. A time window is scheduled in advance." },
         { q: "Do you work with businesses and vacation rentals?", a: "Yes. We offer recurring support plans for offices, hotels and vacation rentals." },
