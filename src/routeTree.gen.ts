@@ -18,6 +18,13 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AvisoDePrivacidadRouteImport } from './routes/aviso-de-privacidad'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EnIndexRouteImport } from './routes/en/index'
+import { Route as EnTermsRouteImport } from './routes/en/terms'
+import { Route as EnServicesRouteImport } from './routes/en/services'
+import { Route as EnRequestDiagnosisRouteImport } from './routes/en/request-diagnosis'
+import { Route as EnPrivacyRouteImport } from './routes/en/privacy'
+import { Route as EnFaqRouteImport } from './routes/en/faq'
+import { Route as EnContactRouteImport } from './routes/en/contact'
+import { Route as EnAboutRouteImport } from './routes/en/about'
 
 const TerminosDelServicioRoute = TerminosDelServicioRouteImport.update({
   id: '/terminos-del-servicio',
@@ -64,6 +71,41 @@ const EnIndexRoute = EnIndexRouteImport.update({
   path: '/en/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnTermsRoute = EnTermsRouteImport.update({
+  id: '/en/terms',
+  path: '/en/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnServicesRoute = EnServicesRouteImport.update({
+  id: '/en/services',
+  path: '/en/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnRequestDiagnosisRoute = EnRequestDiagnosisRouteImport.update({
+  id: '/en/request-diagnosis',
+  path: '/en/request-diagnosis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnPrivacyRoute = EnPrivacyRouteImport.update({
+  id: '/en/privacy',
+  path: '/en/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnFaqRoute = EnFaqRouteImport.update({
+  id: '/en/faq',
+  path: '/en/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnContactRoute = EnContactRouteImport.update({
+  id: '/en/contact',
+  path: '/en/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAboutRoute = EnAboutRouteImport.update({
+  id: '/en/about',
+  path: '/en/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +116,13 @@ export interface FileRoutesByFullPath {
   '/servicios': typeof ServiciosRoute
   '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
   '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/contact': typeof EnContactRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/privacy': typeof EnPrivacyRoute
+  '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
+  '/en/services': typeof EnServicesRoute
+  '/en/terms': typeof EnTermsRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +134,13 @@ export interface FileRoutesByTo {
   '/servicios': typeof ServiciosRoute
   '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
   '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/contact': typeof EnContactRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/privacy': typeof EnPrivacyRoute
+  '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
+  '/en/services': typeof EnServicesRoute
+  '/en/terms': typeof EnTermsRoute
   '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
@@ -97,6 +153,13 @@ export interface FileRoutesById {
   '/servicios': typeof ServiciosRoute
   '/solicitar-diagnostico': typeof SolicitarDiagnosticoRoute
   '/terminos-del-servicio': typeof TerminosDelServicioRoute
+  '/en/about': typeof EnAboutRoute
+  '/en/contact': typeof EnContactRoute
+  '/en/faq': typeof EnFaqRoute
+  '/en/privacy': typeof EnPrivacyRoute
+  '/en/request-diagnosis': typeof EnRequestDiagnosisRoute
+  '/en/services': typeof EnServicesRoute
+  '/en/terms': typeof EnTermsRoute
   '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +173,13 @@ export interface FileRouteTypes {
     | '/servicios'
     | '/solicitar-diagnostico'
     | '/terminos-del-servicio'
+    | '/en/about'
+    | '/en/contact'
+    | '/en/faq'
+    | '/en/privacy'
+    | '/en/request-diagnosis'
+    | '/en/services'
+    | '/en/terms'
     | '/en/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +191,13 @@ export interface FileRouteTypes {
     | '/servicios'
     | '/solicitar-diagnostico'
     | '/terminos-del-servicio'
+    | '/en/about'
+    | '/en/contact'
+    | '/en/faq'
+    | '/en/privacy'
+    | '/en/request-diagnosis'
+    | '/en/services'
+    | '/en/terms'
     | '/en'
   id:
     | '__root__'
@@ -132,6 +209,13 @@ export interface FileRouteTypes {
     | '/servicios'
     | '/solicitar-diagnostico'
     | '/terminos-del-servicio'
+    | '/en/about'
+    | '/en/contact'
+    | '/en/faq'
+    | '/en/privacy'
+    | '/en/request-diagnosis'
+    | '/en/services'
+    | '/en/terms'
     | '/en/'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +228,13 @@ export interface RootRouteChildren {
   ServiciosRoute: typeof ServiciosRoute
   SolicitarDiagnosticoRoute: typeof SolicitarDiagnosticoRoute
   TerminosDelServicioRoute: typeof TerminosDelServicioRoute
+  EnAboutRoute: typeof EnAboutRoute
+  EnContactRoute: typeof EnContactRoute
+  EnFaqRoute: typeof EnFaqRoute
+  EnPrivacyRoute: typeof EnPrivacyRoute
+  EnRequestDiagnosisRoute: typeof EnRequestDiagnosisRoute
+  EnServicesRoute: typeof EnServicesRoute
+  EnTermsRoute: typeof EnTermsRoute
   EnIndexRoute: typeof EnIndexRoute
 }
 
@@ -212,6 +303,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/terms': {
+      id: '/en/terms'
+      path: '/en/terms'
+      fullPath: '/en/terms'
+      preLoaderRoute: typeof EnTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/services': {
+      id: '/en/services'
+      path: '/en/services'
+      fullPath: '/en/services'
+      preLoaderRoute: typeof EnServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/request-diagnosis': {
+      id: '/en/request-diagnosis'
+      path: '/en/request-diagnosis'
+      fullPath: '/en/request-diagnosis'
+      preLoaderRoute: typeof EnRequestDiagnosisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/privacy': {
+      id: '/en/privacy'
+      path: '/en/privacy'
+      fullPath: '/en/privacy'
+      preLoaderRoute: typeof EnPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/faq': {
+      id: '/en/faq'
+      path: '/en/faq'
+      fullPath: '/en/faq'
+      preLoaderRoute: typeof EnFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/contact': {
+      id: '/en/contact'
+      path: '/en/contact'
+      fullPath: '/en/contact'
+      preLoaderRoute: typeof EnContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/about': {
+      id: '/en/about'
+      path: '/en/about'
+      fullPath: '/en/about'
+      preLoaderRoute: typeof EnAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -224,6 +364,13 @@ const rootRouteChildren: RootRouteChildren = {
   ServiciosRoute: ServiciosRoute,
   SolicitarDiagnosticoRoute: SolicitarDiagnosticoRoute,
   TerminosDelServicioRoute: TerminosDelServicioRoute,
+  EnAboutRoute: EnAboutRoute,
+  EnContactRoute: EnContactRoute,
+  EnFaqRoute: EnFaqRoute,
+  EnPrivacyRoute: EnPrivacyRoute,
+  EnRequestDiagnosisRoute: EnRequestDiagnosisRoute,
+  EnServicesRoute: EnServicesRoute,
+  EnTermsRoute: EnTermsRoute,
   EnIndexRoute: EnIndexRoute,
 }
 export const routeTree = rootRouteImport
