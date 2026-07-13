@@ -1,21 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { FaqPage, faqJsonLd } from "@/components/pages/FaqPage";
+import { absoluteUrl } from "@/lib/site";
+
+const path = "/en/faq";
+const spanishPath = "/preguntas-frecuentes";
+const title = "Computer Repair and Tech Support FAQ | San Miguel Tech";
+const description = "Answers about computer repair, Apple devices, software installation, remote support, visits, pricing, privacy and service in San Miguel de Allende.";
 
 export const Route = createFileRoute("/en/faq")({
   component: () => <SiteShell><FaqPage locale="en" /></SiteShell>,
   head: () => ({
     meta: [
-      { title: "FAQ | San Miguel Tech" },
-      { name: "description", content: "Frequently asked questions about repair, upgrades, remote support and tech service in San Miguel de Allende." },
-      { property: "og:title", content: "FAQ | San Miguel Tech" },
-      { property: "og:description", content: "Answers about our local tech services." },
-      { property: "og:url", content: "/en/faq" },
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:url", content: absoluteUrl(path) },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
     links: [
-      { rel: "canonical", href: "/en/faq" },
-      { rel: "alternate", hrefLang: "es", href: "/preguntas-frecuentes" },
-      { rel: "alternate", hrefLang: "en", href: "/en/faq" },
+      { rel: "canonical", href: absoluteUrl(path) },
+      { rel: "alternate", hrefLang: "es-MX", href: absoluteUrl(spanishPath) },
+      { rel: "alternate", hrefLang: "en", href: absoluteUrl(path) },
+      { rel: "alternate", hrefLang: "x-default", href: absoluteUrl(spanishPath) },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(faqJsonLd("en")) }],
   }),
