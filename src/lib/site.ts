@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/dict";
+
 export const SITE = {
   name: "San Miguel Tech",
   domain: "sanmigueldeallende.tech",
@@ -26,4 +28,14 @@ export const whatsappUrl = whatsappPath;
 
 export function absoluteUrl(path = "/"): string {
   return new URL(path, SITE.baseUrl).toString();
+}
+
+export function diagnosisHref(
+  locale: Locale,
+  source: string,
+  service = "general",
+): string {
+  const pathname = locale === "es" ? "/solicitar-diagnostico" : "/en/request-diagnosis";
+  const params = new URLSearchParams({ source, service });
+  return `${pathname}?${params.toString()}`;
 }
