@@ -8,7 +8,7 @@ const englishPath = "/en/software-installation-san-miguel-de-allende";
 const title = "Instalación de Programas en San Miguel de Allende | San Miguel Tech";
 const description = "Instalación y configuración de programas para Windows y Mac en San Miguel de Allende. Office, antivirus, drivers y soporte remoto o presencial.";
 
-export const Route = createFileRoute(path)({
+export const Route = createFileRoute("/instalacion-de-programas-san-miguel-de-allende")({
   component: () => (
     <SiteShell>
       <SoftwareInstallationPage locale="es" />
