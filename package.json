@@ -1,0 +1,1 @@
+{"name":"fotografosbodas-v6-preview","private":true,"scripts":{"build":"mkdir -p dist/santi-clau && cp index.html apple.css dist/ && cp santi-clau/index.html dist/santi-clau/index.html"}}
