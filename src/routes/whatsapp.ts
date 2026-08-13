@@ -2,12 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 const DEFAULT_MESSAGE = "Hola San Miguel Tech, necesito ayuda con un equipo.";
+const WHATSAPP_NUMBER = "447915374776";
 
 export const Route = createFileRoute("/whatsapp")({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        const number = process.env.PRIVATE_WHATSAPP_NUMBER?.replace(/\D/g, "") ?? "";
+        const number = WHATSAPP_NUMBER.replace(/\D/g, "");
 
         if (!/^\d{8,15}$/.test(number)) {
           return new Response("WhatsApp is temporarily unavailable.", {
