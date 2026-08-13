@@ -1,0 +1,1 @@
+{"buildCommand":"echo v6-preview","outputDirectory":".","rewrites":[{"source":"/","destination":"/preview.html"}],"cleanUrls":true,"trailingSlash":true}
