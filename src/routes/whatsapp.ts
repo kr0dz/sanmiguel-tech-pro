@@ -1,35 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const DEFAULT_MESSAGE = "Hola San Miguel Tech, necesito ayuda con un equipo.";
-const WHATSAPP_NUMBER = "447915374776";
+const WHATSAPP_URL = "https://wa.me/447915374776?text=%C2%A1Hola%21%20%F0%9F%91%8B%20Necesito%20ayuda%20con%20un%20servicio%20de%20tecnolog%C3%ADa%20en%20San%20Miguel%20de%20Allende.%20%C2%BFMe%20pueden%20ayudar%3F%20%F0%9F%92%BB%0A%0A%5BTECH%5D";
 
 export const Route = createFileRoute("/whatsapp")({
   server: {
     handlers: {
-      GET: async ({ request }) => {
-        const number = WHATSAPP_NUMBER.replace(/\D/g, "");
-
-        if (!/^\d{8,15}$/.test(number)) {
-          return new Response("WhatsApp is temporarily unavailable.", {
-            status: 503,
-            headers: {
-              "Content-Type": "text/plain; charset=utf-8",
-              "Cache-Control": "no-store",
-            },
-          });
-        }
-
-        const requestUrl = new URL(request.url);
-        const requestedMessage = requestUrl.searchParams.get("text")?.trim();
-        const message = (requestedMessage || DEFAULT_MESSAGE).slice(0, 500);
-        const destination = new URL(`https://wa.me/${number}`);
-        destination.searchParams.set("text", message);
-
+      GET: async () => {
         return new Response(null, {
           status: 302,
           headers: {
-            Location: destination.toString(),
+            Location: WHATSAPP_URL,
             "Cache-Control": "no-store, private",
             "X-Robots-Tag": "noindex, nofollow",
           },
