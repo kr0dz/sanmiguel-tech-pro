@@ -195,6 +195,23 @@ export function HomePage({ locale }: { locale: Locale }) {
             <div key={item} className="apple-card flex items-start gap-3 p-5 text-sm"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />{item}</div>
           ))}
         </div>
+        <div className="mt-7 grid gap-4 rounded-[24px] border border-black/[0.08] bg-white p-6 md:grid-cols-2 md:gap-6">
+          <div>
+            <h3 className="text-base font-semibold">{isES ? "¿Administras una tienda o un negocio de mostrador?" : "Running a retail shop or counter-service business?"}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {isES ? "Además del soporte técnico para equipos y redes, conoce " : "Alongside equipment and network support, explore "}
+              <a className="font-semibold text-brand underline underline-offset-2" href="https://tianquixtli.com/software-para-tiendas/">TIANQUIXTLI POS</a>
+              {isES ? ", un proyecto de punto de venta para gestionar productos, ventas, inventario y caja. Consulta sus versiones disponibles antes de instalar." : ", a point-of-sale project for retail products, sales, inventory, and cash management. Check the available and validated releases before installing."}
+            </p>
+          </div>
+          <div>
+            <h3 className="text-base font-semibold">{isES ? "¿Buscas otros servicios locales?" : "Looking for other local services?"}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {isES ? "Para encontrar profesionales de arte, fotografía, eventos y servicios locales, explora " : "For art, photography, events, and other local service categories, explore "}
+              <a className="font-semibold text-brand underline underline-offset-2" href="https://escribeme.com.mx/">{isES ? "la guía Escríbeme de San Miguel de Allende" : "Escríbeme's San Miguel de Allende service guide"}</a>.
+            </p>
+          </div>
+        </div>
         <a href={diagnosisHref(locale, "home-business", "business")} className="mt-7 inline-flex h-11 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-white">
           {t.business.cta}
         </a>
